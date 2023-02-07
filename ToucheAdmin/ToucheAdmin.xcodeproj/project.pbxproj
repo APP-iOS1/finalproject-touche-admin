@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		65EEF53A29922245007147DF /* ToucheAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF53929922245007147DF /* ToucheAdminApp.swift */; };
+		65EEF53C29922245007147DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF53B29922245007147DF /* ContentView.swift */; };
+		65EEF53E29922245007147DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65EEF53D29922245007147DF /* Assets.xcassets */; };
+		65EEF54129922245007147DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65EEF54029922245007147DF /* Preview Assets.xcassets */; };
+		65EEF54929922283007147DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65EEF54829922283007147DF /* GoogleService-Info.plist */; };
+		65EEF54C29922354007147DF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 65EEF54B29922354007147DF /* FirebaseAuth */; };
+		65EEF54E29922354007147DF /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 65EEF54D29922354007147DF /* FirebaseDatabase */; };
+		65EEF55029922354007147DF /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 65EEF54F29922354007147DF /* FirebaseDatabaseSwift */; };
+		65EEF55229922354007147DF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 65EEF55129922354007147DF /* FirebaseFirestore */; };
+		65EEF55429922354007147DF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 65EEF55329922354007147DF /* FirebaseStorage */; };
+		65EEF5562992292F007147DF /* MagazineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF5552992292F007147DF /* MagazineView.swift */; };
+		65EEF5582992293C007147DF /* RegisterMagazineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF5572992293C007147DF /* RegisterMagazineView.swift */; };
+		65EEF55B2992299E007147DF /* StoreApiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF55A2992299E007147DF /* StoreApiView.swift */; };
+		65EEF55F29922B1A007147DF /* Magazine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF55E29922B1A007147DF /* Magazine.swift */; };
+		65EEF56229922BE5007147DF /* MagazineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF56129922BE5007147DF /* MagazineStore.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		65EEF53629922245007147DF /* ToucheAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToucheAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65EEF53929922245007147DF /* ToucheAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToucheAdminApp.swift; sourceTree = "<group>"; };
+		65EEF53B29922245007147DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		65EEF53D29922245007147DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		65EEF54029922245007147DF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		65EEF54229922245007147DF /* ToucheAdmin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToucheAdmin.entitlements; sourceTree = "<group>"; };
+		65EEF54829922283007147DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		65EEF5552992292F007147DF /* MagazineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineView.swift; sourceTree = "<group>"; };
+		65EEF5572992293C007147DF /* RegisterMagazineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMagazineView.swift; sourceTree = "<group>"; };
+		65EEF55A2992299E007147DF /* StoreApiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreApiView.swift; sourceTree = "<group>"; };
+		65EEF55E29922B1A007147DF /* Magazine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magazine.swift; sourceTree = "<group>"; };
+		65EEF56129922BE5007147DF /* MagazineStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineStore.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		65EEF53329922245007147DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65EEF55029922354007147DF /* FirebaseDatabaseSwift in Frameworks */,
+				65EEF55229922354007147DF /* FirebaseFirestore in Frameworks */,
+				65EEF54E29922354007147DF /* FirebaseDatabase in Frameworks */,
+				65EEF55429922354007147DF /* FirebaseStorage in Frameworks */,
+				65EEF54C29922354007147DF /* FirebaseAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		65EEF52D29922245007147DF = {
+			isa = PBXGroup;
+			children = (
+				65EEF53829922245007147DF /* ToucheAdmin */,
+				65EEF53729922245007147DF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		65EEF53729922245007147DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65EEF53629922245007147DF /* ToucheAdmin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		65EEF53829922245007147DF /* ToucheAdmin */ = {
+			isa = PBXGroup;
+			children = (
+				65EEF54829922283007147DF /* GoogleService-Info.plist */,
+				65EEF53929922245007147DF /* ToucheAdminApp.swift */,
+				65EEF53B29922245007147DF /* ContentView.swift */,
+				65EEF56329922BEE007147DF /* Store */,
+				65EEF56029922B23007147DF /* Model */,
+				65EEF55D299229B5007147DF /* View */,
+				65EEF53D29922245007147DF /* Assets.xcassets */,
+				65EEF54229922245007147DF /* ToucheAdmin.entitlements */,
+				65EEF53F29922245007147DF /* Preview Content */,
+			);
+			path = ToucheAdmin;
+			sourceTree = "<group>";
+		};
+		65EEF53F29922245007147DF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				65EEF54029922245007147DF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		65EEF5592992294C007147DF /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				65EEF5552992292F007147DF /* MagazineView.swift */,
+				65EEF5572992293C007147DF /* RegisterMagazineView.swift */,
+			);
+			path = Magazine;
+			sourceTree = "<group>";
+		};
+		65EEF55C299229A5007147DF /* API */ = {
+			isa = PBXGroup;
+			children = (
+				65EEF55A2992299E007147DF /* StoreApiView.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		65EEF55D299229B5007147DF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65EEF55C299229A5007147DF /* API */,
+				65EEF5592992294C007147DF /* Magazine */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65EEF56029922B23007147DF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				65EEF55E29922B1A007147DF /* Magazine.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65EEF56329922BEE007147DF /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				65EEF56129922BE5007147DF /* MagazineStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		65EEF53529922245007147DF /* ToucheAdmin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65EEF54529922245007147DF /* Build configuration list for PBXNativeTarget "ToucheAdmin" */;
+			buildPhases = (
+				65EEF53229922245007147DF /* Sources */,
+				65EEF53329922245007147DF /* Frameworks */,
+				65EEF53429922245007147DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ToucheAdmin;
+			packageProductDependencies = (
+				65EEF54B29922354007147DF /* FirebaseAuth */,
+				65EEF54D29922354007147DF /* FirebaseDatabase */,
+				65EEF54F29922354007147DF /* FirebaseDatabaseSwift */,
+				65EEF55129922354007147DF /* FirebaseFirestore */,
+				65EEF55329922354007147DF /* FirebaseStorage */,
+			);
+			productName = ToucheAdmin;
+			productReference = 65EEF53629922245007147DF /* ToucheAdmin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		65EEF52E29922245007147DF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					65EEF53529922245007147DF = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 65EEF53129922245007147DF /* Build configuration list for PBXProject "ToucheAdmin" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 65EEF52D29922245007147DF;
+			packageReferences = (
+				65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = 65EEF53729922245007147DF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				65EEF53529922245007147DF /* ToucheAdmin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		65EEF53429922245007147DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65EEF54129922245007147DF /* Preview Assets.xcassets in Resources */,
+				65EEF53E29922245007147DF /* Assets.xcassets in Resources */,
+				65EEF54929922283007147DF /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		65EEF53229922245007147DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65EEF56229922BE5007147DF /* MagazineStore.swift in Sources */,
+				65EEF5562992292F007147DF /* MagazineView.swift in Sources */,
+				65EEF55B2992299E007147DF /* StoreApiView.swift in Sources */,
+				65EEF5582992293C007147DF /* RegisterMagazineView.swift in Sources */,
+				65EEF55F29922B1A007147DF /* Magazine.swift in Sources */,
+				65EEF53C29922245007147DF /* ContentView.swift in Sources */,
+				65EEF53A29922245007147DF /* ToucheAdminApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		65EEF54329922245007147DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		65EEF54429922245007147DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		65EEF54629922245007147DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ToucheAdmin/ToucheAdmin.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ToucheAdmin/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codelion.ToucheAdmin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		65EEF54729922245007147DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ToucheAdmin/ToucheAdmin.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ToucheAdmin/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codelion.ToucheAdmin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		65EEF53129922245007147DF /* Build configuration list for PBXProject "ToucheAdmin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65EEF54329922245007147DF /* Debug */,
+				65EEF54429922245007147DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65EEF54529922245007147DF /* Build configuration list for PBXNativeTarget "ToucheAdmin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65EEF54629922245007147DF /* Debug */,
+				65EEF54729922245007147DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65EEF54B29922354007147DF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		65EEF54D29922354007147DF /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		65EEF54F29922354007147DF /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		65EEF55129922354007147DF /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		65EEF55329922354007147DF /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 65EEF52E29922245007147DF /* Project object */;
+}
