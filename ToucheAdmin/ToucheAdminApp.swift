@@ -28,6 +28,6 @@ struct ToucheAdminApp: App {
             ContentView()
                 .environmentObject(accountStore)
         }
-        .windowStyle(.hiddenTitleBar)
+        .windowToolbarStyle(.unified(showsTitle: false))
     }
 }
