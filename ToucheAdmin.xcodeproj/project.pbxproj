@@ -21,6 +21,11 @@
 		AAD9E7412994769C00DE31DF /* NSTextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E7402994769C00DE31DF /* NSTextField+.swift */; };
 		AAD9E74329947A9E00DE31DF /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E74229947A9E00DE31DF /* View+.swift */; };
 		AAD9E74529947BF900DE31DF /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E74429947BF900DE31DF /* Color+.swift */; };
+		AAD9E7482994B19C00DE31DF /* AccountStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E7472994B19C00DE31DF /* AccountStore.swift */; };
+		AAD9E74A2994B1B500DE31DF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AAD9E7492994B1B500DE31DF /* FirebaseAuth */; };
+		AAD9E74C2994B1B500DE31DF /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AAD9E74B2994B1B500DE31DF /* FirebaseAuthCombine-Community */; };
+		AAD9E74E2994B5BD00DE31DF /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AAD9E74D2994B5BD00DE31DF /* FirebaseAnalytics */; };
+		AAD9E7502994B5BD00DE31DF /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AAD9E74F2994B5BD00DE31DF /* FirebaseAnalyticsSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,7 @@
 		AAD9E7402994769C00DE31DF /* NSTextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+.swift"; sourceTree = "<group>"; };
 		AAD9E74229947A9E00DE31DF /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		AAD9E74429947BF900DE31DF /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		AAD9E7472994B19C00DE31DF /* AccountStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +53,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAD9E7502994B5BD00DE31DF /* FirebaseAnalyticsSwift in Frameworks */,
+				AAD9E74A2994B1B500DE31DF /* FirebaseAuth in Frameworks */,
+				AAD9E74C2994B1B500DE31DF /* FirebaseAuthCombine-Community in Frameworks */,
+				AAD9E74E2994B5BD00DE31DF /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				65EEF56129922BE5007147DF /* MagazineStore.swift */,
+				AAD9E7472994B19C00DE31DF /* AccountStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -180,6 +191,10 @@
 			);
 			name = ToucheAdmin;
 			packageProductDependencies = (
+				AAD9E7492994B1B500DE31DF /* FirebaseAuth */,
+				AAD9E74B2994B1B500DE31DF /* FirebaseAuthCombine-Community */,
+				AAD9E74D2994B5BD00DE31DF /* FirebaseAnalytics */,
+				AAD9E74F2994B5BD00DE31DF /* FirebaseAnalyticsSwift */,
 			);
 			productName = ToucheAdmin;
 			productReference = 65EEF53629922245007147DF /* ToucheAdmin.app */;
@@ -242,6 +257,7 @@
 				65EEF56229922BE5007147DF /* MagazineStore.swift in Sources */,
 				AAD9E7412994769C00DE31DF /* NSTextField+.swift in Sources */,
 				65EEF5562992292F007147DF /* MagazineView.swift in Sources */,
+				AAD9E7482994B19C00DE31DF /* AccountStore.swift in Sources */,
 				65EEF55B2992299E007147DF /* StoreApiView.swift in Sources */,
 				65EEF5582992293C007147DF /* RegisterMagazineView.swift in Sources */,
 				AA995B792993961400E7AB35 /* AccountView.swift in Sources */,
@@ -375,10 +391,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ToucheAdmin/ToucheAdmin.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToucheAdmin/Preview Content\"";
+				DEVELOPMENT_TEAM = WPL7Q42L8U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -400,10 +418,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ToucheAdmin/ToucheAdmin.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToucheAdmin/Preview Content\"";
+				DEVELOPMENT_TEAM = WPL7Q42L8U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -452,6 +472,29 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AAD9E7492994B1B500DE31DF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		AAD9E74B2994B1B500DE31DF /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		AAD9E74D2994B5BD00DE31DF /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		AAD9E74F2994B5BD00DE31DF /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65EEF52E29922245007147DF /* Project object */;
 }
