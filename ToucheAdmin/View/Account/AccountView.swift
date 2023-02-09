@@ -11,8 +11,8 @@ import SwiftUI
 // 2. 컬러디자인 사용.
 struct AccountView: View {
     @Binding var isSignIn: Bool
-    @State private var name: String = ""
-    @State private var password: String = ""
+    @EnvironmentObject var accountStore: AccountStore
+   
     private let logo: [String] = ["T","o","u","c","h","é"]
     var body: some View {
         let rect = getRect()
@@ -28,7 +28,7 @@ struct AccountView: View {
                     Text("User Name")
                         .font(.body)
                         .foregroundColor(.secondary)
-                    TextField("Enter your name..", text: $name)
+                    TextField("Enter your name..", text: $accountStore.email)
                         .padding(.vertical, 10)
                         .padding(.horizontal)
                         .background(Color.toucheGray)
@@ -41,7 +41,7 @@ struct AccountView: View {
                     Text("Password")
                         .font(.body)
                         .foregroundColor(.secondary)
-                    SecureField("Enter your password..", text: $password)
+                    SecureField("Enter your password..", text: $accountStore.password)
                         .padding(.vertical, 10)
                         .padding(.horizontal)
                         .background(Color.toucheGray)
@@ -53,7 +53,7 @@ struct AccountView: View {
                 Button {
                     // seek password
                 } label: {
-                    Text("Forgot Password")
+                    Text("Forgot Password?")
                         .font(.body)
                         .foregroundColor(.secondary)
                         .underline()
@@ -64,7 +64,9 @@ struct AccountView: View {
                 VStack(alignment: .leading, spacing: 16.0) {
                     
                     Button {
-                        // Sign In Action
+                        Task {
+                            isSignIn = await accountStore.signInWithEmailPassword()
+                        }
                     } label: {
                         Text("Sign In")
                             .font(.title3)
@@ -77,6 +79,11 @@ struct AccountView: View {
                     }
                     .buttonStyle(.plain)
                     .shadow(color: .primary.opacity(0.2), radius: 2, x: 0, y: 0)
+                    .disabled(!accountStore.isValid)
+                    
+                    Text(accountStore.errorMessage)
+                        .foregroundColor(.red)
+                        .font(.caption)
                     
                 }
                 
@@ -151,5 +158,6 @@ struct AccountView: View {
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(AccountStore())
     }
 }
