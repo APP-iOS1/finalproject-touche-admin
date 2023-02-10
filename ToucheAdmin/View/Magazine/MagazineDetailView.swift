@@ -9,26 +9,18 @@ import SwiftUI
 import FirebaseFirestoreSwift
 
 struct MagazineDetailView: View {
-//    let selectedMagazine: Magazine
+    @Binding var flow: Flow
     @State private var title: String = ""
     @State private var subTitle: String = ""
-//    @FirestoreQuery private var perfumes: [Perfume]
-    var perfumes: [Perfume] = []
     @EnvironmentObject var magazineStore: MagazineStore
-    
-//    init(selectedMagazine: Magazine) {
-//        self.selectedMagazine = selectedMagazine
-//        _title = State<String>(wrappedValue: selectedMagazine.title)
-//        _subTitle = State<String>(wrappedValue: selectedMagazine.subTitle)
-//        _perfumes = FirestoreQuery<[Perfume]>(collectionPath: "Perfume", predicates: [.whereField("perfumeId", isIn: selectedMagazine.perfumeIds)])
-//    }
+    @EnvironmentObject var perfumeStore: PerfumeStore
     
     var body: some View {
         ZStack {
-            if let magazine = magazineStore.magazine {
+            if !magazineStore.magazines.isEmpty {
                 ScrollView {
                     VStack(alignment: .center, spacing: 20.0) {
-                        Text(magazine.createdDate.toDateFormat().formatted())
+                        Text(magazineStore.magazine.createdDate.toDateFormat().formatted())
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         
@@ -51,7 +43,7 @@ struct MagazineDetailView: View {
                                 .foregroundColor(.secondary)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 LazyHStack {
-                                    ForEach(perfumes, id: \.self) { (perfume: Perfume) in
+                                    ForEach(perfumeStore.selectedPerfumes, id: \.self) { (perfume: Perfume) in
                                         AsyncImage(
                                             url: URL(string: perfume.image450),
                                             content: { image in
@@ -75,7 +67,7 @@ struct MagazineDetailView: View {
                                     .foregroundColor(.secondary)
                                 
                                 AsyncImage(
-                                    url: URL(string: magazine.contentImage),
+                                    url: URL(string: magazineStore.magazine.contentImage),
                                     content: { image in
                                         image
                                             .resizable()
@@ -93,7 +85,7 @@ struct MagazineDetailView: View {
                                     .foregroundColor(.secondary)
                                 
                                 AsyncImage(
-                                    url: URL(string: magazine.bodyImage),
+                                    url: URL(string: magazineStore.magazine.bodyImage),
                                     content: { image in
                                         image
                                             .resizable()
@@ -111,9 +103,19 @@ struct MagazineDetailView: View {
                     }
                     .padding()
                 }
-                .onChange(of: magazine) { newValue in
+                .onChange(of: magazineStore.magazine) { newValue in
                     title = newValue.title
                     subTitle = newValue.subTitle
+                }
+                .toolbar {
+                    ToolbarItem(placement: ToolbarItemPlacement.automatic) {
+                        Button {
+                            flow = flow == .create ? .read : .create
+                        } label: {
+                            Image(systemName: flow == .create ? "chevron.right" : "chevron.left")
+                        }
+
+                    }
                 }
             } else {
                 Text("No Content Here .. 😅")
@@ -125,6 +127,8 @@ struct MagazineDetailView: View {
 
 struct MagazineDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MagazineDetailView()
+        MagazineDetailView(flow: .constant(.read))
+            .environmentObject(PerfumeStore())
+            .environmentObject(MagazineStore())
     }
 }

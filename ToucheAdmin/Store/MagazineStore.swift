@@ -16,15 +16,12 @@ class MagazineStore: ObservableObject {
     let storage = Storage.storage()
     let firestore = Firestore.firestore().collection("Magazine")
     @Published var magazines: [Magazine] = []
-    @Published var magazine: Magazine?
+    @Published var magazine: Magazine = Magazine.dummy[2]
     
     init() {
         readMagazines()
-    }
-    
-    func readMagazine(_ id: String) {
-        firestore.document(id).getDocument { [weak self] snapshot, _ in
-            self?.magazine = try? snapshot?.data(as: Magazine?.self)
+        if let magazine = self.magazines.first {
+            self.magazine = magazine
         }
     }
     

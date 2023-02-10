@@ -70,16 +70,18 @@ struct AccountView: View {
                         }
                     } label: {
                         Text("Sign In")
-                            .font(.title3)
+                            .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity)
                             .frame(height: 40)
-                            .background(.tertiary)
-                            .cornerRadius(20)
+                            .clipShape(Capsule())
+                            .background(
+                                Capsule()
+                                    .stroke(.primary)
+                            )
                     }
                     .buttonStyle(.plain)
-                    .shadow(color: .primary.opacity(0.2), radius: 2, x: 0, y: 0)
                     .disabled(!accountStore.isValid)
                     
                     Text(accountStore.errorMessage)

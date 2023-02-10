@@ -13,11 +13,13 @@
 		65EEF54129922245007147DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65EEF54029922245007147DF /* Preview Assets.xcassets */; };
 		65EEF54929922283007147DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65EEF54829922283007147DF /* GoogleService-Info.plist */; };
 		65EEF5562992292F007147DF /* MagazineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF5552992292F007147DF /* MagazineDetailView.swift */; };
-		65EEF5582992293C007147DF /* RegisterMagazineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF5572992293C007147DF /* RegisterMagazineView.swift */; };
+		65EEF5582992293C007147DF /* MagazineRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF5572992293C007147DF /* MagazineRegisterView.swift */; };
 		65EEF55B2992299E007147DF /* StoreApiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF55A2992299E007147DF /* StoreApiView.swift */; };
 		65EEF55F29922B1A007147DF /* Magazine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF55E29922B1A007147DF /* Magazine.swift */; };
 		AA4D7F3C2995DF0100087E1F /* Due.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D7F3B2995DF0100087E1F /* Due.swift */; };
 		AA4D7F3E2995DF2B00087E1F /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D7F3D2995DF2B00087E1F /* Flow.swift */; };
+		AA4D7F402995E07A00087E1F /* PerfumeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D7F3F2995E07A00087E1F /* PerfumeStore.swift */; };
+		AA4D7F422995EE7100087E1F /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D7F412995EE7100087E1F /* TestView.swift */; };
 		AA995B792993961400E7AB35 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA995B782993961400E7AB35 /* AccountView.swift */; };
 		AAD9E7412994769C00DE31DF /* NSTextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E7402994769C00DE31DF /* NSTextField+.swift */; };
 		AAD9E74329947A9E00DE31DF /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E74229947A9E00DE31DF /* View+.swift */; };
@@ -49,11 +51,13 @@
 		65EEF54229922245007147DF /* ToucheAdmin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToucheAdmin.entitlements; sourceTree = "<group>"; };
 		65EEF54829922283007147DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65EEF5552992292F007147DF /* MagazineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineDetailView.swift; sourceTree = "<group>"; };
-		65EEF5572992293C007147DF /* RegisterMagazineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMagazineView.swift; sourceTree = "<group>"; };
+		65EEF5572992293C007147DF /* MagazineRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineRegisterView.swift; sourceTree = "<group>"; };
 		65EEF55A2992299E007147DF /* StoreApiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreApiView.swift; sourceTree = "<group>"; };
 		65EEF55E29922B1A007147DF /* Magazine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magazine.swift; sourceTree = "<group>"; };
 		AA4D7F3B2995DF0100087E1F /* Due.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Due.swift; sourceTree = "<group>"; };
 		AA4D7F3D2995DF2B00087E1F /* Flow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
+		AA4D7F3F2995E07A00087E1F /* PerfumeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeStore.swift; sourceTree = "<group>"; };
+		AA4D7F412995EE7100087E1F /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		AA995B782993961400E7AB35 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		AAD9E7402994769C00DE31DF /* NSTextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+.swift"; sourceTree = "<group>"; };
 		AAD9E74229947A9E00DE31DF /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -135,7 +139,7 @@
 			children = (
 				65EEF5552992292F007147DF /* MagazineDetailView.swift */,
 				AAD9E7612994F1BD00DE31DF /* MagazineContentView.swift */,
-				65EEF5572992293C007147DF /* RegisterMagazineView.swift */,
+				65EEF5572992293C007147DF /* MagazineRegisterView.swift */,
 			);
 			path = Magazine;
 			sourceTree = "<group>";
@@ -155,6 +159,7 @@
 				65EEF55C299229A5007147DF /* API */,
 				65EEF5592992294C007147DF /* Magazine */,
 				AAD9E7512994C17100DE31DF /* AdminView.swift */,
+				AA4D7F412995EE7100087E1F /* TestView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				AAD9E7532994E8CA00DE31DF /* MagazineStore.swift */,
+				AA4D7F3F2995E07A00087E1F /* PerfumeStore.swift */,
 				AAD9E7472994B19C00DE31DF /* AccountStore.swift */,
 			);
 			path = Store;
@@ -298,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA4D7F422995EE7100087E1F /* TestView.swift in Sources */,
 				AAD9E7542994E8CA00DE31DF /* MagazineStore.swift in Sources */,
 				AA4D7F3E2995DF2B00087E1F /* Flow.swift in Sources */,
 				AAD9E7412994769C00DE31DF /* NSTextField+.swift in Sources */,
@@ -305,7 +312,7 @@
 				65EEF5562992292F007147DF /* MagazineDetailView.swift in Sources */,
 				AAD9E7482994B19C00DE31DF /* AccountStore.swift in Sources */,
 				65EEF55B2992299E007147DF /* StoreApiView.swift in Sources */,
-				65EEF5582992293C007147DF /* RegisterMagazineView.swift in Sources */,
+				65EEF5582992293C007147DF /* MagazineRegisterView.swift in Sources */,
 				AA995B792993961400E7AB35 /* AccountView.swift in Sources */,
 				65EEF55F29922B1A007147DF /* Magazine.swift in Sources */,
 				AAD9E7522994C17100DE31DF /* AdminView.swift in Sources */,
@@ -316,6 +323,7 @@
 				AA4D7F3C2995DF0100087E1F /* Due.swift in Sources */,
 				AAD9E74329947A9E00DE31DF /* View+.swift in Sources */,
 				AAD9E7642994F4CB00DE31DF /* Double+.swift in Sources */,
+				AA4D7F402995E07A00087E1F /* PerfumeStore.swift in Sources */,
 				65EEF53A29922245007147DF /* ToucheAdminApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

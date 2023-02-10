@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MagazineContentView: View {
+    @Binding var flow: Flow
     @EnvironmentObject var magazineStore: MagazineStore
     
     var body: some View {
@@ -49,14 +50,12 @@ struct MagazineContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: ToolbarItemPlacement.automatic) {
                 Button {
-                    print("create!")
+                    flow = .create
                 } label: {
                     Image(systemName: "plus")
                 }
                 Button {
-                    if let magazine = magazineStore.magazine {
-                        magazineStore.deleteMagazine(magazine)
-                    }
+                    magazineStore.deleteMagazine(magazineStore.magazine)
                 } label: {
                     Image(systemName: "trash")
                 }
@@ -67,7 +66,7 @@ struct MagazineContentView: View {
 
 struct MagazineContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MagazineContentView()
+        MagazineContentView(flow: .constant(.read))
             .environmentObject(MagazineStore())
     }
 }
