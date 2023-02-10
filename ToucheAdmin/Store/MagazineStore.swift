@@ -80,7 +80,7 @@ class MagazineStore: ObservableObject {
     
     
     //MARK: - Firestore에 매거진 문서 생성
-    func createMagazineAtFirestore(magazine: Magazine, bodyImageString: String, contentImageString: String) async {
+    private func createMagazineAtFirestore(magazine: Magazine, bodyImageString: String, contentImageString: String) async {
         do {
             try await firestore.document(magazine.id).setData([
                 "id": magazine.id,
@@ -95,6 +95,11 @@ class MagazineStore: ObservableObject {
         } catch {
             print("매거진 생성 실패")
         }
+    }
+    
+    // MARK: - Delete
+    func deleteMagazine(_ magazine: Magazine) {
+        firestore.document(magazine.id).delete()
     }
 
 }

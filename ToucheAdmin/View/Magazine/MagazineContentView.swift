@@ -54,7 +54,9 @@ struct MagazineContentView: View {
                     Image(systemName: "plus")
                 }
                 Button {
-                    print("delete")
+                    if let magazine = magazineStore.magazine {
+                        magazineStore.deleteMagazine(magazine)
+                    }
                 } label: {
                     Image(systemName: "trash")
                 }
