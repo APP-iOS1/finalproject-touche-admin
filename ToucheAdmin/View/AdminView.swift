@@ -16,20 +16,6 @@ struct AdminView: View {
     @State private var dueID: Due.ID = .init(stringLiteral: "magazine")
     @State private var visibility: NavigationSplitViewVisibility = .all
     
-    enum Due: String, Identifiable, CaseIterable {
-        case magazine
-        case server
-        
-        var id: String { self.rawValue }
-        var title: String { self.rawValue }
-        var systemName: String {
-            switch self {
-            case .magazine: return "square.and.pencil"
-            case .server: return "server.rack"
-            }
-        }
-    }
-    
     var body: some View {
         let rect = getRect()
         let width = rect.width

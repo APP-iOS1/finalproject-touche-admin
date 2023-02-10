@@ -16,6 +16,8 @@
 		65EEF5582992293C007147DF /* RegisterMagazineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF5572992293C007147DF /* RegisterMagazineView.swift */; };
 		65EEF55B2992299E007147DF /* StoreApiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF55A2992299E007147DF /* StoreApiView.swift */; };
 		65EEF55F29922B1A007147DF /* Magazine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF55E29922B1A007147DF /* Magazine.swift */; };
+		AA4D7F3C2995DF0100087E1F /* Due.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D7F3B2995DF0100087E1F /* Due.swift */; };
+		AA4D7F3E2995DF2B00087E1F /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D7F3D2995DF2B00087E1F /* Flow.swift */; };
 		AA995B792993961400E7AB35 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA995B782993961400E7AB35 /* AccountView.swift */; };
 		AAD9E7412994769C00DE31DF /* NSTextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E7402994769C00DE31DF /* NSTextField+.swift */; };
 		AAD9E74329947A9E00DE31DF /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E74229947A9E00DE31DF /* View+.swift */; };
@@ -50,6 +52,8 @@
 		65EEF5572992293C007147DF /* RegisterMagazineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMagazineView.swift; sourceTree = "<group>"; };
 		65EEF55A2992299E007147DF /* StoreApiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreApiView.swift; sourceTree = "<group>"; };
 		65EEF55E29922B1A007147DF /* Magazine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magazine.swift; sourceTree = "<group>"; };
+		AA4D7F3B2995DF0100087E1F /* Due.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Due.swift; sourceTree = "<group>"; };
+		AA4D7F3D2995DF2B00087E1F /* Flow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
 		AA995B782993961400E7AB35 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		AAD9E7402994769C00DE31DF /* NSTextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+.swift"; sourceTree = "<group>"; };
 		AAD9E74229947A9E00DE31DF /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 				65EEF54829922283007147DF /* GoogleService-Info.plist */,
 				65EEF53929922245007147DF /* ToucheAdminApp.swift */,
 				65EEF53B29922245007147DF /* ContentView.swift */,
+				AA4D7F3A2995DEF800087E1F /* Enum */,
 				AAD9E73F2994768C00DE31DF /* Extension */,
 				65EEF56329922BEE007147DF /* Store */,
 				65EEF56029922B23007147DF /* Model */,
@@ -170,6 +175,15 @@
 				AAD9E7472994B19C00DE31DF /* AccountStore.swift */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		AA4D7F3A2995DEF800087E1F /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				AA4D7F3B2995DF0100087E1F /* Due.swift */,
+				AA4D7F3D2995DF2B00087E1F /* Flow.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		AA995B77299395FA00E7AB35 /* Account */ = {
@@ -285,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAD9E7542994E8CA00DE31DF /* MagazineStore.swift in Sources */,
+				AA4D7F3E2995DF2B00087E1F /* Flow.swift in Sources */,
 				AAD9E7412994769C00DE31DF /* NSTextField+.swift in Sources */,
 				AAD9E7622994F1BD00DE31DF /* MagazineContentView.swift in Sources */,
 				65EEF5562992292F007147DF /* MagazineDetailView.swift in Sources */,
@@ -298,6 +313,7 @@
 				AAD9E7662994FBD800DE31DF /* Perfume.swift in Sources */,
 				AAD9E7602994EA1100DE31DF /* NSImage+.swift in Sources */,
 				AAD9E74529947BF900DE31DF /* Color+.swift in Sources */,
+				AA4D7F3C2995DF0100087E1F /* Due.swift in Sources */,
 				AAD9E74329947A9E00DE31DF /* View+.swift in Sources */,
 				AAD9E7642994F4CB00DE31DF /* Double+.swift in Sources */,
 				65EEF53A29922245007147DF /* ToucheAdminApp.swift in Sources */,
