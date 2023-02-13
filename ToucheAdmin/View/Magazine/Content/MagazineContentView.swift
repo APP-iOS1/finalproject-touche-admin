@@ -16,17 +16,22 @@ struct MagazineContentView: View {
             NavigationLink(value: magazine) {
                 HStack(alignment: .top, spacing: 8.0) {
                     // Content Image...
-                    AsyncImage(
-                        url: URL(string: magazine.contentImage)) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 50)
-                                .cornerRadius(6)
-                            
-                        } placeholder: {
-                            ProgressView()
-                        }
+                    // ===================== FireStorage Issue ===================
+//                    AsyncImage(
+//                        url: URL(string: magazine.contentImage)) { image in
+//                            image
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 50, height: 50)
+//                                .cornerRadius(6)
+//
+//                        } placeholder: {
+//                            ProgressView()
+//                        }
+                    // ========================== comment below ===================
+                    Rectangle()
+                        .frame(width: 50, height: 50)
+                    // ============================================================
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text(magazine.title)
@@ -51,11 +56,14 @@ struct MagazineContentView: View {
             ToolbarItemGroup(placement: ToolbarItemPlacement.automatic) {
                 Button {
                     flow = .create
+                    magazineStore.magazine = nil
                 } label: {
                     Image(systemName: "plus")
                 }
                 Button {
-                    magazineStore.deleteMagazine(magazineStore.magazine)
+                    if let magazine = magazineStore.magazine {
+                        magazineStore.deleteMagazine(magazine)
+                    }
                 } label: {
                     Image(systemName: "trash")
                 }

@@ -9,13 +9,15 @@ import SwiftUI
 
 // layout reference: https://www.appcoda.com/navigationsplitview-swiftui/
 struct AdminView: View {
+    // only used in AdminView
     @Binding var isSignIn: Bool
     @State private var isAccountTapped: Bool = false
+    @State private var dueID: Due.ID = .init(stringLiteral: "magazine")
+    @State private var visibility: NavigationSplitViewVisibility = .all
+    // sharing data
     @EnvironmentObject var accountStore: AccountStore
     @StateObject var magazineStore = MagazineStore()
     @StateObject var perfumeStore = PerfumeStore()
-    @State private var dueID: Due.ID = .init(stringLiteral: "magazine")
-    @State private var visibility: NavigationSplitViewVisibility = .all
     
     // create
     @State private var flow: Flow = .read
@@ -25,7 +27,7 @@ struct AdminView: View {
         let width = rect.width
         let height = rect.height
         NavigationSplitView(columnVisibility: $visibility,
-                            sidebar: {
+        sidebar: {
             sideBar()
                 .navigationSplitViewColumnWidth(200.0)
         }, content: {
@@ -44,9 +46,11 @@ struct AdminView: View {
         }, detail: {
             switch flow {
             case .read:
-                MagazineDetailView(flow: $flow)
+                MagazineReadView(flow: $flow)
             case .create:
                 MagazineRegisterView(flow: $flow)
+            case .edit:
+                MagazineEditView(flow: $flow)
             }
         })
         .frame(width: width * 0.6, height: height * 0.6)
@@ -78,7 +82,6 @@ private extension AdminView {
         VStack(alignment: .center) {
             Button {
                 isAccountTapped = true
-                print("Tapped!")
             } label: {
                 VStack(alignment: .center, spacing: 8) {
                     Image("touche-logo")

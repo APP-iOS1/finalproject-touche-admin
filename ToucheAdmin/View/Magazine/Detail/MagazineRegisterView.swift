@@ -10,6 +10,8 @@ import SwiftUI
 struct MagazineRegisterView: View {
     @Binding var flow: Flow
     @EnvironmentObject var perfumeStore: PerfumeStore
+    @EnvironmentObject var magazinestore: MagazineStore
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack(alignment: .bottom, spacing: 10) {
@@ -29,7 +31,7 @@ struct MagazineRegisterView: View {
                 .disabled(perfumeStore.isNextButtonDisabled)
                 
                 Button("Next") {
-                    flow = .read
+                    flow = .edit
                 }
                 .disabled(perfumeStore.isNextButtonDisabled)
             } // HSTACK
@@ -138,6 +140,9 @@ struct MagazineRegisterView: View {
             }
         } // VSTACK
         .padding()
+        .onChange(of: magazinestore.magazine) { _ in
+            flow = .read
+        }
     }
 }
 
@@ -145,5 +150,6 @@ struct MagazineRegisterView_Previews: PreviewProvider {
     static var previews: some View {
         MagazineRegisterView(flow: .constant(.create))
             .environmentObject(PerfumeStore())
+            .environmentObject(MagazineStore())
     }
 }

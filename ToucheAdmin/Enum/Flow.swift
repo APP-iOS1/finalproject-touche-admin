@@ -10,4 +10,5 @@ import Foundation
 enum Flow {
     case read
     case create
+    case edit
 }

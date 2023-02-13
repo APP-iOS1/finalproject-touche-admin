@@ -25,6 +25,7 @@ struct ToucheAdminApp: App {
     
     var body: some Scene {
         WindowGroup {
+//            MagazineEditView(flow: .constant(.edit))
             ContentView()
                 .environmentObject(accountStore)
         }
