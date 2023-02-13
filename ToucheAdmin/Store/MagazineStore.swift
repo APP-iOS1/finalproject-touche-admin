@@ -54,7 +54,7 @@ class MagazineStore: ObservableObject {
         var contentImage: String?
         var bodyImage:String?
         
-        let contentImageRef = storage.reference(withPath: "magazine/\(magazine.id)/contentImage.jpg")
+        let contentImageRef = storage.reference(withPath: "magazine/\(magazine.id)/contentImage")
         guard let selectedContentImage = selectedContentUImage else { return }
         var imageData = selectedContentImage.jpegDataFrom(image: selectedContentImage)
         do {
@@ -69,7 +69,7 @@ class MagazineStore: ObservableObject {
         }
         
         
-        let bodyImageRef = storage.reference(withPath: "magazine/\(magazine.id)/bodyImage.jpg")
+        let bodyImageRef = storage.reference(withPath: "magazine/\(magazine.id)/bodyImage")
         guard let selectedBodyImage = selectedBodyUImage else { return }
         imageData = selectedBodyImage.jpegDataFrom(image: selectedBodyImage)
         do {
