@@ -68,21 +68,21 @@ struct MagazineReadView: View {
                                     .foregroundColor(.secondary)
                                 
                                 // ======================== FireStorage Issue ==============
-//                                AsyncImage(
-//                                    url: URL(string: magazine.contentImage),
-//                                    content: { image in
-//                                        image
-//                                            .resizable()
-//                                            .aspectRatio(1.0, contentMode: .fill)
-//                                            .frame(width: 250, height: 250)
-//                                            .cornerRadius(8.0)
-//                                    }) {
-//                                        ProgressView()
-//                                            .frame(width: 250, height: 250)
-//                                    }
+                                AsyncImage(
+                                    url: URL(string: magazine.contentImage),
+                                    content: { image in
+                                        image
+                                            .resizable()
+                                            .aspectRatio(1.0, contentMode: .fill)
+                                            .frame(width: 250, height: 250)
+                                            .cornerRadius(8.0)
+                                    }) {
+                                        ProgressView()
+                                            .frame(width: 250, height: 250)
+                                    }
                                 // ================== comment below =============================
-                                Rectangle()
-                                    .frame(width: 250, height: 250)
+//                                Rectangle()
+//                                    .frame(width: 250, height: 250)
                                 // ==============================================================
                             } // VSTACK(CONTENT IMAGE)
                             
@@ -90,21 +90,23 @@ struct MagazineReadView: View {
                                 Text("Body Image")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
-                                
-//                                AsyncImage(
-//                                    url: URL(string: magazine.bodyImage),
-//                                    content: { image in
-//                                        image
-//                                            .resizable()
-//                                            .aspectRatio(1.0, contentMode: .fill)
-//                                            .frame(width: 250, height: 250)
-//                                            .cornerRadius(8.0)
-//                                    }) {
-//                                        ProgressView()
-//                                            .frame(width: 250, height: 250)
-//                                    }
-                                Rectangle()
-                                    .frame(width: 250, height: 250)
+                                // ======================== FireStorage Issue ==============
+                                AsyncImage(
+                                    url: URL(string: magazine.bodyImage),
+                                    content: { image in
+                                        image
+                                            .resizable()
+                                            .aspectRatio(1.0, contentMode: .fill)
+                                            .frame(width: 250, height: 250)
+                                            .cornerRadius(8.0)
+                                    }) {
+                                        ProgressView()
+                                            .frame(width: 250, height: 250)
+                                    }
+                                // ================== comment below =============================
+//                                Rectangle()
+//                                    .frame(width: 250, height: 250)
+                                // ==============================================================
                             } // VSTACK(BODY IMAGE)
                             
                             Spacer()

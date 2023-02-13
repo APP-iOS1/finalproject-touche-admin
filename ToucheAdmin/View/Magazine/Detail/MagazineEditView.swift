@@ -6,15 +6,66 @@
 //
 
 import SwiftUI
+import Combine
+
+final class MagazineEditViewModel: ObservableObject {
+    @Published var title: String = ""
+    @Published var subTitle: String = ""
+    @Published var contentImage: NSImage?
+    @Published var bodyImage: NSImage?
+    @Published var isLoading: Bool = false
+    // assigning properties
+    @Published var canSaveState: Bool = false
+    var cancellables = Set<AnyCancellable>()
+    
+    enum ImageCategory {
+        case content
+        case body
+    }
+    
+    init() {
+        $title
+            .combineLatest($subTitle, $contentImage, $bodyImage)
+            .map { title, subTitle, contentImage, bodyImage in
+                return !title.isEmpty && !subTitle.isEmpty && contentImage != nil && bodyImage != nil
+            }
+            .assign(to: &$canSaveState)
+    }
+    
+    func fecthNSImage(url: URL, category: ImageCategory) {
+        URLSession.shared.dataTaskPublisher(for: url)
+            .receive(on: DispatchQueue.main)
+            .compactMap { (data: Data, response: URLResponse) -> NSImage? in
+                guard let response = response as? HTTPURLResponse,
+                      (200..<300).contains(response.statusCode),
+                      let nsImage = NSImage(data: data) else { return nil }
+                return nsImage
+            }
+            .sink { status in
+                switch status {
+                case .finished:
+                    print("fetch done")
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { [weak self] nsImage in
+                switch category {
+                case .content:
+                    self?.contentImage = nsImage
+                case .body:
+                    self?.bodyImage = nsImage
+                }
+            }
+            .store(in: &cancellables)
+
+    }
+}
 
 // openPannel: [https://serialcoder.dev/text-tutorials/macos-tutorials/save-and-open-panels-in-swiftui-based-macos-apps/]
 // drag and drop image: [https://www.hackingwithswift.com/quick-start/swiftui/how-to-support-drag-and-drop-in-swiftui]
 struct MagazineEditView: View {
     @Binding var flow: Flow
-    @State private var title: String = ""
-    @State private var subTitle: String = ""
-    @State private var contentImage: NSImage?
-    @State private var bodyImage: NSImage?
+    @StateObject var vm = MagazineEditViewModel()
     @EnvironmentObject var perfumeStore: PerfumeStore
     @EnvironmentObject var magazineStore: MagazineStore
     var perfumes: [Perfume] {
@@ -33,42 +84,52 @@ struct MagazineEditView: View {
                     .font(.footnote)
                     .foregroundColor(.secondary)
                 
-                HStack {
-                    Spacer()
-                    Button {
-                        // 모든 조건이 부합해야 저장기능 가능
-                        guard !title.isEmpty && !subTitle.isEmpty,
-                              let contentImage = contentImage,
-                              let bodyImage = bodyImage else { return }
-                        
-                        // 새로운 메거진 생성
-                        let magazine = Magazine(
-                            title: title,
-                            subTitle: subTitle,
-                            contentImage: "",
-                            bodyImage: "",
-                            createdDate: Date.now.timeIntervalSince1970,
-                            perfumeIds: perfumes.map { $0.perfumeId }
-                        )
-                        
-                        Task {
-                            // 메거진 서버에 저장
-                            await magazineStore.createMagazine(magazine: magazine, selectedContentUImage: contentImage, selectedBodyUImage: bodyImage)
-                            // 읽기 모드
-                            flow = .read
+                if magazineStore.magazine == nil {
+                    HStack {
+                        Spacer()
+                        Button {
+                            flow = .create
+                        } label: {
+                            Label("back", systemImage: "chevron.left")
                         }
-                    } label: {
-                        Text("Save")
-                    }
-                } // HSTACK(SAVE)
+                        Button {
+                            // 새로운 메거진 생성
+                            let magazine = Magazine(
+                                title: vm.title,
+                                subTitle: vm.subTitle,
+                                contentImage: "",
+                                bodyImage: "",
+                                createdDate: Date.now.timeIntervalSince1970,
+                                perfumeIds: perfumes.map { $0.perfumeId }
+                            )
+                            
+                            
+                            
+                            Task {
+                                // upload start
+                                vm.isLoading = true
+                                // 메거진 서버에 저장
+                                await magazineStore.createMagazine(magazine: magazine, selectedContentUImage: vm.contentImage, selectedBodyUImage: vm.bodyImage)
+                                // 읽기 모드
+                                flow = .read
+                                // upload end
+                                vm.isLoading = false
+                            }
+                            
+                        } label: {
+                            Text("Save")
+                        }
+                        .disabled(!vm.canSaveState)
+                    } // HSTACK(SAVE)
+                }
                 
                 Form {
-                    TextField(text: $title, prompt: Text("Required.."), axis: .vertical) {
+                    TextField(text: $vm.title, prompt: Text("Required.."), axis: .vertical) {
                         Text("Title")
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    TextField(text: $subTitle, prompt: Text("Required.."), axis: .vertical) {
+                    TextField(text: $vm.subTitle, prompt: Text("Required.."), axis: .vertical) {
                         Text("Sub Title")
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -109,10 +170,10 @@ struct MagazineEditView: View {
                         Button {
                             if let url = showOpenPanel(),
                                let nsImage = NSImage(contentsOf: url) {
-                                contentImage = nsImage
+                                vm.contentImage = nsImage
                             }
                         } label: {
-                            if let contentImage = contentImage {
+                            if let contentImage = vm.contentImage {
                                 Image(nsImage: contentImage)
                                     .resizable()
                                     .frame(width: 250, height: 250, alignment: .center)
@@ -122,7 +183,7 @@ struct MagazineEditView: View {
                                     .fill(.quaternary)
                                     .frame(width: 250, height: 250)
                                     .overlay {
-                                        Text("Select the image!\n➕")
+                                        Text("Select the image!\n**+**")
                                             .multilineTextAlignment(.center)
                                     }
                                 
@@ -131,7 +192,7 @@ struct MagazineEditView: View {
                         .buttonStyle(.plain)
                         .dropDestination(for: Data.self) { items, location in
                             if let item = items.first {
-                                contentImage = NSImage(data: item)
+                                vm.contentImage = NSImage(data: item)
                             }
                             
                             return true
@@ -147,10 +208,10 @@ struct MagazineEditView: View {
                         Button {
                             if let url = showOpenPanel(),
                                let nsImage = NSImage(contentsOf: url) {
-                                bodyImage = nsImage
+                                vm.bodyImage = nsImage
                             }
                         } label: {
-                            if let bodyImage = bodyImage {
+                            if let bodyImage = vm.bodyImage {
                                 Image(nsImage: bodyImage)
                                     .resizable()
                                     .frame(width: 250, height: 250, alignment: .center)
@@ -160,7 +221,7 @@ struct MagazineEditView: View {
                                     .fill(.quaternary)
                                     .frame(width: 250, height: 250)
                                     .overlay {
-                                        Text("Select the image!\n➕")
+                                        Text("Select the image!\n**+**")
                                             .multilineTextAlignment(.center)
                                     }
                             }
@@ -168,7 +229,7 @@ struct MagazineEditView: View {
                         .buttonStyle(.plain)
                         .dropDestination(for: Data.self) { items, location in
                             if let item = items.first {
-                                bodyImage = NSImage(data: item)
+                                vm.bodyImage = NSImage(data: item)
                             }
                             
                             return true
@@ -182,14 +243,65 @@ struct MagazineEditView: View {
             } // VSTACK
             .padding()
         } // SCROLL
+        .onAppear {
+            switch flow {
+            case .edit:
+                if let magazine = magazineStore.magazine,
+                   let contentImageURL = URL(string: magazine.contentImage),
+                   let bodyImageURL = URL(string: magazine.bodyImage) {
+                    vm.title = magazine.title
+                    vm.subTitle = magazine.subTitle
+                    vm.fecthNSImage(url: contentImageURL, category: .content)
+                    vm.fecthNSImage(url: bodyImageURL, category: .body)
+                    // images
+                    // url -> download -> NSImage
+                   }
+            default:
+                vm.title = ""
+                vm.subTitle = ""
+                vm.contentImage = nil
+                vm.bodyImage = nil
+            }
+        }
+        .overlay(content: {
+            if vm.isLoading {
+                ProgressView()
+                    .frame(width: 200, height: 200)
+                    .background(Material.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 20.0))
+            }
+        })
+        .onChange(of: magazineStore.magazine) { magazine in
+            flow = .read
+        }
         .toolbar {
-            ToolbarItem {
-                Button {
-                    flow = .create
-                } label: {
-                    Image(systemName: "chevron.left")
+            if let magazine = magazineStore.magazine {
+                ToolbarItem(placement: ToolbarItemPlacement.automatic) {
+                    Button("done") {
+                        flow = .read
+                        // 기존 메거진 업데이트
+                        let magazine = Magazine(
+                            id: magazine.id,
+                            title: vm.title,
+                            subTitle: vm.subTitle,
+                            contentImage: "",
+                            bodyImage: "",
+                            createdDate: Date.now.timeIntervalSince1970,
+                            perfumeIds: perfumes.map { $0.perfumeId }
+                        )
+                        
+                        Task {
+                            // upload start
+                            vm.isLoading = true
+                            // 메거진 서버에 저장
+                            await magazineStore.createMagazine(magazine: magazine, selectedContentUImage: vm.contentImage, selectedBodyUImage: vm.bodyImage)
+                            // 읽기 모드
+                            flow = .read
+                            // upload end
+                            vm.isLoading = false
+                        }
+                    }
                 }
-                
             }
         }
     }
