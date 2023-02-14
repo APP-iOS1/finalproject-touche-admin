@@ -18,9 +18,12 @@ struct AdminView: View {
     @EnvironmentObject var accountStore: AccountStore
     @StateObject var magazineStore = MagazineStore()
     @StateObject var perfumeStore = PerfumeStore()
+    @StateObject var apiStore = APIStore()
     
-    // create
+    // magazine flow
     @State private var flow: Flow = .read
+    // server task
+    @State private var task: ServerTask = .log
     
     var body: some View {
         let rect = getRect()
@@ -38,19 +41,39 @@ struct AdminView: View {
                     .navigationSplitViewColumnWidth(250.0)
                 /// server
             default:
-                List(0..<10) { i in
-                    Text("\(i) server")
+                List(ServerTask.allCases, selection: $task) { task in
+                    NavigationLink(value: task) {
+                        HStack(alignment: .center, spacing: 8.0) {
+                            Image(systemName: task.systemName, variableValue: 0.3)
+                                .resizable()
+                                .aspectRatio(1.0, contentMode: .fit)
+                                .frame(width: 20, height: 20)
+                            
+                            Text(task.title)
+                                .font(.headline)
+                        }
+                    }
                 }
                 .navigationSplitViewColumnWidth(250.0)
             }
         }, detail: {
-            switch flow {
-            case .read:
-                MagazineReadView(flow: $flow)
-            case .create:
-                MagazineRegisterView(flow: $flow)
-            case .edit:
-                MagazineEditView(flow: $flow)
+            switch dueID {
+            case "magazine":
+                switch flow {
+                case .read:
+                    MagazineReadView(flow: $flow)
+                case .create:
+                    MagazineRegisterView(flow: $flow)
+                case .edit:
+                    MagazineEditView(flow: $flow)
+                }
+            default:
+                switch task {
+                case .log:
+                    Text("log")
+                case .network:
+                    Text("network")
+                }
             }
         })
         .frame(width: width * 0.6, height: height * 0.6)
