@@ -29,11 +29,11 @@ struct MagazineContentView: View {
 //                        } placeholder: {
 //                            ProgressView()
 //                        }
-                    DownloadingImageView(
-                        urlString: magazine.contentImage,
-                        key: (magazine.id + "_content"))
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(6)
+//                    DownloadingImageView(
+//                        urlString: magazine.contentImage,
+//                        key: (magazine.id + "_content"))
+//                    .frame(width: 50, height: 50)
+//                    .cornerRadius(6)
                     // ========================== comment below ===================
                     Rectangle()
                         .frame(width: 50, height: 50)

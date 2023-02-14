@@ -59,6 +59,23 @@ struct MagazineReadView: View {
                                         DownloadingImageView(urlString: perfume.image450, key: perfume.perfumeId)
                                             .frame(width: 100, height: 100)
                                             .cornerRadius(8.0)
+                                            .overlay(content: {
+                                                if perfumeStore.hoverCheckPerfume != nil  && perfumeStore.hoverCheckPerfume! == perfume {
+                                                    ZStack {
+                                                        Color.black.opacity(0.5)
+                                                            .cornerRadius(8.0)
+                                                        
+                                                        Text(perfume.displayName)
+                                                            .font(.body)
+                                                            .fontWeight(.light)
+                                                            .foregroundColor(.white)
+                                                            .multilineTextAlignment(.center)
+                                                    }
+                                                }
+                                            })
+                                            .onHover { hovering in
+                                                perfumeStore.hasHoverPerfume(perfume, hovering: hovering)
+                                            }
                                     }
                                 }
                             } // SCROLL(PERFUMES)
@@ -84,9 +101,9 @@ struct MagazineReadView: View {
 //                                            .frame(width: 250, height: 250)
 //                                    }
                                 // ================== Image Cache View ==========================
-                                DownloadingImageView(urlString: magazine.contentImage, key: (magazine.id + "_content"))
-                                    .frame(width: 250, height: 250)
-                                    .cornerRadius(8.0)
+//                                DownloadingImageView(urlString: magazine.contentImage, key: (magazine.id + "_content"))
+//                                    .frame(width: 250, height: 250)
+//                                    .cornerRadius(8.0)
                                 // ================== comment below =============================
                                 Rectangle()
                                     .frame(width: 250, height: 250)
@@ -111,9 +128,9 @@ struct MagazineReadView: View {
 //                                            .frame(width: 250, height: 250)
 //                                    }
                                 // ================== comment below =============================
-                                DownloadingImageView(urlString: magazine.bodyImage, key: (magazine.id + "_body"))
-                                    .frame(width: 250, height: 250)
-                                    .cornerRadius(8.0)
+//                                DownloadingImageView(urlString: magazine.bodyImage, key: (magazine.id + "_body"))
+//                                    .frame(width: 250, height: 250)
+//                                    .cornerRadius(8.0)
                                 // ===============================================================
                                 Rectangle()
                                     .frame(width: 250, height: 250)

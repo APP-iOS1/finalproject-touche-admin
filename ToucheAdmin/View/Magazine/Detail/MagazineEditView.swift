@@ -143,16 +143,36 @@ struct MagazineEditView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack {
                             ForEach(perfumes, id: \.self) { (perfume: Perfume) in
-                                AsyncImage(
-                                    url: URL(string: perfume.image450),
-                                    content: { image in
-                                        image
-                                            .resizable()
-                                            .aspectRatio(1.0, contentMode: .fill)
-                                            .frame(width: 100, height: 100)
-                                            .cornerRadius(8.0)
-                                    }) {
-                                        ProgressView()
+//                                AsyncImage(
+//                                    url: URL(string: perfume.image450),
+//                                    content: { image in
+//                                        image
+//                                            .resizable()
+//                                            .aspectRatio(1.0, contentMode: .fill)
+//                                            .frame(width: 100, height: 100)
+//                                            .cornerRadius(8.0)
+//                                    }) {
+//                                        ProgressView()
+//                                    }
+                                DownloadingImageView(urlString: perfume.image450, key: perfume.perfumeId)
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(8.0)
+                                    .overlay(content: {
+                                        if perfumeStore.hoverCheckPerfume != nil  && perfumeStore.hoverCheckPerfume! == perfume {
+                                            ZStack {
+                                                Color.black.opacity(0.5)
+                                                    .cornerRadius(8.0)
+                                                
+                                                Text(perfume.displayName)
+                                                    .font(.body)
+                                                    .fontWeight(.light)
+                                                    .foregroundColor(.white)
+                                                    .multilineTextAlignment(.center)
+                                            }
+                                        }
+                                    })
+                                    .onHover { hovering in
+                                        perfumeStore.hasHoverPerfume(perfume, hovering: hovering)
                                     }
                             }
                         }
