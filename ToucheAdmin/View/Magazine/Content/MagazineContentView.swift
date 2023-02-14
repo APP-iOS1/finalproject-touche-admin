@@ -11,6 +11,7 @@ import SwiftUI
 struct MagazineContentView: View {
     @Binding var flow: Flow
     @EnvironmentObject var magazineStore: MagazineStore
+    @State private var hasTrashAlert: Bool = false
     
     var body: some View {
         List(magazineStore.magazines, selection: $magazineStore.magazine) { magazine in
@@ -67,11 +68,19 @@ struct MagazineContentView: View {
                     Image(systemName: "plus")
                 }
                 Button {
-                    if let magazine = magazineStore.magazine {
-                        magazineStore.deleteMagazine(magazine)
-                    }
+                    hasTrashAlert = true
                 } label: {
                     Image(systemName: "trash")
+                }
+            }
+        }
+        .alert("Are you sure deleting this magazine?", isPresented: $hasTrashAlert) {
+            Button("Cancel", role: .cancel) {
+                //
+            }
+            Button("Delete", role: .destructive) {
+                if let magazine = magazineStore.magazine {
+                    magazineStore.deleteMagazine(magazine)
                 }
             }
         }

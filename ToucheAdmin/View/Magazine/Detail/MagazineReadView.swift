@@ -45,17 +45,6 @@ struct MagazineReadView: View {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 LazyHStack {
                                     ForEach(perfumes, id: \.self) { (perfume: Perfume) in
-//                                        AsyncImage(
-//                                            url: URL(string: perfume.image450),
-//                                            content: { image in
-//                                                image
-//                                                    .resizable()
-//                                                    .aspectRatio(1.0, contentMode: .fill)
-//                                                    .frame(width: 100, height: 100)
-//                                                    .cornerRadius(8.0)
-//                                            }) {
-//                                                ProgressView()
-//                                            }
                                         DownloadingImageView(urlString: perfume.image450, key: perfume.perfumeId)
                                             .frame(width: 100, height: 100)
                                             .cornerRadius(8.0)
@@ -76,8 +65,8 @@ struct MagazineReadView: View {
                                             .onHover { hovering in
                                                 perfumeStore.hasHoverPerfume(perfume, hovering: hovering)
                                             }
-                                    }
-                                }
+                                    } // LOOP
+                                } // LAZYHSTACK
                             } // SCROLL(PERFUMES)
                         } // VSTACK(PERFUMES)
                         

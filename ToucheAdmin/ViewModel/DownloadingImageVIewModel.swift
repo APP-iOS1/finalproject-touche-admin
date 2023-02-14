@@ -27,15 +27,15 @@ final class DownloadingImageViewModel: ObservableObject {
     func getImage() {
         if let savedImage = manager.get(key: self.key) {
             self.image = savedImage
-            print("Getting saved image!")
+//            print("Getting saved image!")
         } else {
             downloadImage()
-            print("Downloading image now!")
+//            print("Downloading image now!")
         }
     }
     
     func downloadImage() {
-        print("Downloading image now!")
+//        print("Downloading image now!")
         isLoading = true
         guard let url = URL(string: urlString) else {
             isLoading = false
