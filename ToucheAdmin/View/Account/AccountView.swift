@@ -31,7 +31,8 @@ struct AccountView: View {
                     TextField("Enter your name..", text: $accountStore.email)
                         .padding(.vertical, 10)
                         .padding(.horizontal)
-                        .background(Color.toucheGray)
+                        .foregroundColor(.primary)
+                        .background(.quaternary)
                         .cornerRadius(8)
                         .textFieldStyle(.plain)
                     
@@ -44,7 +45,7 @@ struct AccountView: View {
                     SecureField("Enter your password..", text: $accountStore.password)
                         .padding(.vertical, 10)
                         .padding(.horizontal)
-                        .background(Color.toucheGray)
+                        .background(.quaternary)
                         .cornerRadius(8)
                         .textFieldStyle(.plain)
                     
@@ -69,16 +70,18 @@ struct AccountView: View {
                         }
                     } label: {
                         Text("Sign In")
-                            .font(.title3)
+                            .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 30)
-                            .background(Color.white)
-                            .cornerRadius(20)
+                            .frame(height: 40)
+                            .clipShape(Capsule())
+                            .background(
+                                Capsule()
+                                    .stroke(.primary)
+                            )
                     }
                     .buttonStyle(.plain)
-                    .shadow(color: .primary.opacity(0.2), radius: 2, x: 0, y: 0)
                     .disabled(!accountStore.isValid)
                     
                     Text(accountStore.errorMessage)
@@ -92,7 +95,6 @@ struct AccountView: View {
             .padding()
             .padding(.top, 30)
             .frame(width: width * 0.6 * 0.3)
-            .background(Color.toucheWhite)
             
             Divider()
             
@@ -149,9 +151,10 @@ struct AccountView: View {
                     }
                 }
             } // ZSTACK
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .ignoresSafeArea()
         .frame(width: width * 0.6, height: height * 0.6)
+        .presentedWindowStyle(.hiddenTitleBar)
     }
 }
 

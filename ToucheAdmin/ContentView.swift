@@ -12,13 +12,7 @@ struct ContentView: View {
     var body: some View {
         switch isSignIn {
         case true:
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                Text("Hello, world!")
-            }
-            .padding()
+            AdminView(isSignIn: $isSignIn)
         case false:
             AccountView(isSignIn: $isSignIn)
         }
