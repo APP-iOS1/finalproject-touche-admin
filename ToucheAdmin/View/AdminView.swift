@@ -23,63 +23,53 @@ struct AdminView: View {
     // magazine flow
     @State private var flow: Flow = .read
     // server task
-    @State private var task: ServerTask = .log
+    @State private var task: ServerTask = .network
     
     var body: some View {
         let rect = getRect()
         let width = rect.width
         let height = rect.height
-        NavigationSplitView(columnVisibility: $visibility,
-        sidebar: {
-            sideBar()
-                .navigationSplitViewColumnWidth(200.0)
-        }, content: {
-            switch dueID {
-                /// magazine
-            case "magazine":
-                MagazineContentView(flow: $flow)
-                    .navigationSplitViewColumnWidth(250.0)
-                /// server
-            default:
-                List(ServerTask.allCases, selection: $task) { task in
-                    NavigationLink(value: task) {
-                        HStack(alignment: .center, spacing: 8.0) {
-                            Image(systemName: task.systemName, variableValue: 0.3)
-                                .resizable()
-                                .aspectRatio(1.0, contentMode: .fit)
-                                .frame(width: 20, height: 20)
-                            
-                            Text(task.title)
-                                .font(.headline)
-                        }
+        NavigationSplitView(
+            columnVisibility: $visibility,
+            sidebar: {
+                sideBar()
+                    .navigationSplitViewColumnWidth(200.0)
+            }, content: {
+                switch dueID {
+                    /// magazine
+                case "magazine":
+                    MagazineContentView(flow: $flow)
+                        .navigationSplitViewColumnWidth(250.0)
+                    /// server
+                default:
+                    APIContentView(task: $task)
+                        .navigationSplitViewColumnWidth(250.0)
+                }
+            }, detail: {
+                switch dueID {
+                case "magazine":
+                    switch flow {
+                    case .read:
+                        MagazineReadView(flow: $flow)
+                    case .create:
+                        MagazineRegisterView(flow: $flow)
+                    case .edit:
+                        MagazineEditView(flow: $flow)
+                    }
+                default:
+                    switch task {
+                    case .network:
+                        APINetworkView()
+                    case .log:
+                        APILogView()
                     }
                 }
-                .navigationSplitViewColumnWidth(250.0)
-            }
-        }, detail: {
-            switch dueID {
-            case "magazine":
-                switch flow {
-                case .read:
-                    MagazineReadView(flow: $flow)
-                case .create:
-                    MagazineRegisterView(flow: $flow)
-                case .edit:
-                    MagazineEditView(flow: $flow)
-                }
-            default:
-                switch task {
-                case .log:
-                    Text("log")
-                case .network:
-                    Text("network")
-                }
-            }
-        })
+            })
         .frame(width: width * 0.6, height: height * 0.6)
         .navigationSplitViewStyle(.balanced)
         .environmentObject(magazineStore)
         .environmentObject(perfumeStore)
+        .environmentObject(apiStore)
         .alert("Account", isPresented: $isAccountTapped) {
             Button {
                 //

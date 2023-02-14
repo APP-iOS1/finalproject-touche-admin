@@ -14,11 +14,12 @@ class APIStore: ObservableObject {
     @Published var notice: String = ""
     @Published var products: [Product] = []
     @Published var perfumes: [Perfume] = []
-//    @Published var logs: [String] = []
+    @Published var logs: [Log] = []
+    @Published var isLoading: Bool = false
     
     // ==========================================
     private var cursor: QueryDocumentSnapshot?
-    private let pageSize = 60
+    let pageSize = 60
     // ==========================================
     
     var cancellables = Set<AnyCancellable>()
@@ -80,7 +81,9 @@ class APIStore: ObservableObject {
     }
     
     func fetchlistDataFromAPI(page: Int = 1) {
-        notice = "대기"
+        isLoading = true
+        
+        notice = "Loading.."
         
         let headers = [
             "X-RapidAPI-Key": "bd60134ebbmsh47ad7cc85cd24d7p1cbc4ejsn3ed23622063e",
@@ -102,7 +105,7 @@ class APIStore: ObservableObject {
                         return task.data
                     default:
                         self.notice = "\(response.statusCode) error"
-                        print(response.description)
+                        print("response error: ", response.description)
                         throw URLError(.badURL)
                     }
                 }
@@ -114,9 +117,15 @@ class APIStore: ObservableObject {
             .sink { [weak self] in
                 switch $0 {
                 case .finished:
-                    self?.notice = "성공"
+                    self?.notice = "success"
+                    self?.isLoading = false
+                    let log = Log(content: "SUCCESS - \(page) Page Products Fectch", date: Date.now.timeIntervalSince1970)
+                    self?.logs.insert(log, at: 0)
                 case .failure(let error):
                     self?.notice =  "fail: \(error)"
+                    self?.isLoading = false
+                    let log = Log(content: "FAIL - \(page) Page Products Fectch\nREASON - \(error)", date: Date.now.timeIntervalSince1970)
+                    self?.logs.insert(log, at: 0)
                 }
             } receiveValue: { [weak self] (products: [Product]) in
                 self?.products = products
@@ -147,6 +156,8 @@ class APIStore: ObservableObject {
         
         // ------------------- products/detail fetching ------------------------------
         
+        isLoading = true
+        
         let headers = [
             "X-RapidAPI-Key": "bd60134ebbmsh47ad7cc85cd24d7p1cbc4ejsn3ed23622063e",
             "X-RapidAPI-Host": "sephora.p.rapidapi.com"
@@ -165,6 +176,8 @@ class APIStore: ObservableObject {
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 self.notice = "datatask error : " + String(describing: error?.localizedDescription)
+                self.isLoading = false
+                
             } else {
                 if let jsonData = try? JSONDecoder().decode(Detail.self, from: data ?? Data()),
                    let response = response as? HTTPURLResponse {
@@ -179,22 +192,6 @@ class APIStore: ObservableObject {
                     // ------------------ firestore ------------------------------
                     
                     if finalType == PerfumeColor.types[0].name || finalType == PerfumeColor.types[1].name || finalType == PerfumeColor.types[2].name || finalType == PerfumeColor.types[3].name || finalType == PerfumeColor.types[4].name || finalType == PerfumeColor.types[5].name || finalType == PerfumeColor.types[6].name || finalType == PerfumeColor.types[7].name || finalType == PerfumeColor.types[8].name || finalType == PerfumeColor.types[9].name || finalType == PerfumeColor.types[10].name || finalType == PerfumeColor.types[11].name || finalType == PerfumeColor.types[12].name || finalType == PerfumeColor.types[13].name || finalType == PerfumeColor.types[14].name || finalType == PerfumeColor.types[15].name {
-                        
-//                        let perfume: [String: Any] = [
-//                            "perfumeId": product.productId,
-//                            "brandName": product.brandName,
-//                            "displayName": product.displayName,
-//                            "heroImage": product.heroImage,
-//                            "image450": product.image450,
-//                            "fragranceFamily": family,
-//                            "scentType": finalType,
-//                            "keyNotes": finalKeyNotes,
-//                            "fragranceDescription": quickDescription,
-//                            "likedPeople": [],
-//                            "commentCount": 0,
-//                            "totalPerfumeScore": 0
-//
-//                        ]
                         
                         let perfume = Perfume(
                             perfumeId: product.productId,
@@ -216,15 +213,28 @@ class APIStore: ObservableObject {
 //                            .setData(perfume)
                         do {
                             try self.path.collection("Perfume").document(perfume.perfumeId).setData(from: perfume)
-                            self.perfumes.append(perfume)
-                            self.notice = "Success uploading perfume data to firestore(collection name: `Perfume`)"
+                            DispatchQueue.main.async {
+                                self.perfumes.append(perfume)
+                                self.notice = "Success uploading perfume data to firestore(collection name: `Perfume`)"
+                                let log = Log(content: "SUCCESS - \(product.brandName) / \(product.displayName) Uploading", date: Date.now.timeIntervalSince1970)
+                                self.logs.insert(log, at: 0)
+                                self.isLoading = false
+                            }
                         } catch let error {
                             self.notice = "Error: \(error.localizedDescription)"
+                            let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Uploading\nREASON - \(error)", date: Date.now.timeIntervalSince1970)
+                            self.logs.insert(log, at: 0)
+                            self.isLoading = false
                         }
                         
                     }
                 } else {
-                    self.notice = "json decoding fail: " + String(describing: error?.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.notice = "json decoding fail: " + String(describing: error?.localizedDescription)
+                        let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Uploading\nREASON - \(self.notice)", date: Date.now.timeIntervalSince1970)
+                        self.logs.insert(log, at: 0)
+                        self.isLoading = false
+                    }
                 }
             }
         })

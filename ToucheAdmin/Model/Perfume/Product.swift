@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct Product: Codable {
+struct Product: Codable, Identifiable {
     var brandName: String
     var displayName: String
     var heroImage: String
     var productId: String
     var image450: String
+    var id: String { self.productId }
 }

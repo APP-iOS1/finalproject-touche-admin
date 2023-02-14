@@ -9,8 +9,8 @@ import Foundation
 
 enum ServerTask: String, Identifiable, CaseIterable {
     
-    case log
     case network
+    case log
     
     var id: String { self.rawValue }
     var title: String { self.rawValue }
