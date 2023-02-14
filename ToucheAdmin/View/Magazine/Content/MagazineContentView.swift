@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct MagazineContentView: View {
     @Binding var flow: Flow
     @EnvironmentObject var magazineStore: MagazineStore
@@ -17,20 +18,25 @@ struct MagazineContentView: View {
                 HStack(alignment: .top, spacing: 8.0) {
                     // Content Image...
                     // ===================== FireStorage Issue ===================
-                    AsyncImage(
-                        url: URL(string: magazine.contentImage)) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 50)
-                                .cornerRadius(6)
-
-                        } placeholder: {
-                            ProgressView()
-                        }
+//                    AsyncImage(
+//                        url: URL(string: magazine.contentImage)) { image in
+//                            image
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 50, height: 50)
+//                                .cornerRadius(6)
+//
+//                        } placeholder: {
+//                            ProgressView()
+//                        }
+                    DownloadingImageView(
+                        urlString: magazine.contentImage,
+                        key: (magazine.id + "_content"))
+                    .frame(width: 50, height: 50)
+                    .cornerRadius(6)
                     // ========================== comment below ===================
-//                    Rectangle()
-//                        .frame(width: 50, height: 50)
+                    Rectangle()
+                        .frame(width: 50, height: 50)
                     // ============================================================
                     
                     VStack(alignment: .leading, spacing: 2) {

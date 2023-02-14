@@ -84,47 +84,40 @@ struct MagazineRegisterView: View {
                             perfumeStore.popPerfume(perfume) :
                             perfumeStore.selectPerfume(perfume)
                         } label: {
-                            AsyncImage(url: URL(string: perfume.heroImage)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .cornerRadius(8.0)
-                                    .overlay(content: {
-                                        if perfumeStore.hoverCheckPerfume != nil  && perfumeStore.hoverCheckPerfume! == perfume {
-                                            ZStack {
-                                                Color.black.opacity(0.5)
-                                                    .cornerRadius(8.0)
-                                                
-                                                Text(perfume.displayName)
-                                                    .font(.body)
-                                                    .fontWeight(.light)
-                                                    .foregroundColor(.white)
-                                                    .multilineTextAlignment(.center)
-                                            }
+                            DownloadingImageView(urlString: perfume.heroImage, key: perfume.perfumeId)
+                                .cornerRadius(8.0)
+                                .overlay(content: {
+                                    if perfumeStore.hoverCheckPerfume != nil  && perfumeStore.hoverCheckPerfume! == perfume {
+                                        ZStack {
+                                            Color.black.opacity(0.5)
+                                                .cornerRadius(8.0)
+                                            
+                                            Text(perfume.displayName)
+                                                .font(.body)
+                                                .fontWeight(.light)
+                                                .foregroundColor(.white)
+                                                .multilineTextAlignment(.center)
                                         }
-                                    })
-                                    .padding(4)
-                                    .padding(.top, 12)
-                                    .overlay(alignment: .topTrailing, content: {
-                                        if perfumeStore.checkPerfume(perfume) {
-                                            Image(systemName: "checkmark.seal")
-                                                .font(.title3)
-                                                .foregroundStyle(
-                                                    AngularGradient(
-                                                        colors: [.touchePink, .toucheBlue, .touchePurple, .toucheSky],
-                                                        center: .center
-                                                    )
+                                    }
+                                })
+                                .padding(4)
+                                .padding(.top, 12)
+                                .overlay(alignment: .topTrailing, content: {
+                                    if perfumeStore.checkPerfume(perfume) {
+                                        Image(systemName: "checkmark.seal")
+                                            .font(.title3)
+                                            .foregroundStyle(
+                                                AngularGradient(
+                                                    colors: [.touchePink, .toucheBlue, .touchePurple, .toucheSky],
+                                                    center: .center
                                                 )
-                                                .padding(.top, 20.0)
-                                                .padding(.trailing, 8.0)
-                                        }
-                                    })
-                                    .shadow(color: .primary.opacity(0.2) ,radius: 1)
-                            } placeholder: {
-                                ProgressView()
-                            } // IMAGE
-                            
-                        }
+                                            )
+                                            .padding(.top, 20.0)
+                                            .padding(.trailing, 8.0)
+                                    }
+                                })
+                                .shadow(color: .primary.opacity(0.2) ,radius: 1)
+                        }  // IMAGE
                         .buttonStyle(.plain)
                         .onHover { hovering in
                             perfumeStore.hasHoverPerfume(perfume, hovering: hovering)

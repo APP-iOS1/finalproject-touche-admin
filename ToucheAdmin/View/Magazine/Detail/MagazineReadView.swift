@@ -45,17 +45,20 @@ struct MagazineReadView: View {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 LazyHStack {
                                     ForEach(perfumes, id: \.self) { (perfume: Perfume) in
-                                        AsyncImage(
-                                            url: URL(string: perfume.image450),
-                                            content: { image in
-                                                image
-                                                    .resizable()
-                                                    .aspectRatio(1.0, contentMode: .fill)
-                                                    .frame(width: 100, height: 100)
-                                                    .cornerRadius(8.0)
-                                            }) {
-                                                ProgressView()
-                                            }
+//                                        AsyncImage(
+//                                            url: URL(string: perfume.image450),
+//                                            content: { image in
+//                                                image
+//                                                    .resizable()
+//                                                    .aspectRatio(1.0, contentMode: .fill)
+//                                                    .frame(width: 100, height: 100)
+//                                                    .cornerRadius(8.0)
+//                                            }) {
+//                                                ProgressView()
+//                                            }
+                                        DownloadingImageView(urlString: perfume.image450, key: perfume.perfumeId)
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(8.0)
                                     }
                                 }
                             } // SCROLL(PERFUMES)
@@ -68,21 +71,25 @@ struct MagazineReadView: View {
                                     .foregroundColor(.secondary)
                                 
                                 // ======================== FireStorage Issue ==============
-                                AsyncImage(
-                                    url: URL(string: magazine.contentImage),
-                                    content: { image in
-                                        image
-                                            .resizable()
-                                            .aspectRatio(1.0, contentMode: .fill)
-                                            .frame(width: 250, height: 250)
-                                            .cornerRadius(8.0)
-                                    }) {
-                                        ProgressView()
-                                            .frame(width: 250, height: 250)
-                                    }
+//                                AsyncImage(
+//                                    url: URL(string: magazine.contentImage),
+//                                    content: { image in
+//                                        image
+//                                            .resizable()
+//                                            .aspectRatio(1.0, contentMode: .fill)
+//                                            .frame(width: 250, height: 250)
+//                                            .cornerRadius(8.0)
+//                                    }) {
+//                                        ProgressView()
+//                                            .frame(width: 250, height: 250)
+//                                    }
+                                // ================== Image Cache View ==========================
+                                DownloadingImageView(urlString: magazine.contentImage, key: (magazine.id + "_content"))
+                                    .frame(width: 250, height: 250)
+                                    .cornerRadius(8.0)
                                 // ================== comment below =============================
-//                                Rectangle()
-//                                    .frame(width: 250, height: 250)
+                                Rectangle()
+                                    .frame(width: 250, height: 250)
                                 // ==============================================================
                             } // VSTACK(CONTENT IMAGE)
                             
@@ -91,21 +98,25 @@ struct MagazineReadView: View {
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                 // ======================== FireStorage Issue ==============
-                                AsyncImage(
-                                    url: URL(string: magazine.bodyImage),
-                                    content: { image in
-                                        image
-                                            .resizable()
-                                            .aspectRatio(1.0, contentMode: .fill)
-                                            .frame(width: 250, height: 250)
-                                            .cornerRadius(8.0)
-                                    }) {
-                                        ProgressView()
-                                            .frame(width: 250, height: 250)
-                                    }
+//                                AsyncImage(
+//                                    url: URL(string: magazine.bodyImage),
+//                                    content: { image in
+//                                        image
+//                                            .resizable()
+//                                            .aspectRatio(1.0, contentMode: .fill)
+//                                            .frame(width: 250, height: 250)
+//                                            .cornerRadius(8.0)
+//                                    }) {
+//                                        ProgressView()
+//                                            .frame(width: 250, height: 250)
+//                                    }
                                 // ================== comment below =============================
-//                                Rectangle()
-//                                    .frame(width: 250, height: 250)
+                                DownloadingImageView(urlString: magazine.bodyImage, key: (magazine.id + "_body"))
+                                    .frame(width: 250, height: 250)
+                                    .cornerRadius(8.0)
+                                // ===============================================================
+                                Rectangle()
+                                    .frame(width: 250, height: 250)
                                 // ==============================================================
                             } // VSTACK(BODY IMAGE)
                             

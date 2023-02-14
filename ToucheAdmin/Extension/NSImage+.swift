@@ -15,4 +15,12 @@ extension NSImage {
             let jpegData = bitmapRep.representation(using: NSBitmapImageRep.FileType.jpeg, properties: [:])!
             return jpegData
         }
+    
+    /// link from [stackoverflow](https://stackoverflow.com/questions/17507170/how-to-save-png-file-from-nsimage-retina-issues)
+    func pngDataFrom() -> Data? {
+        let cgImage = self.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+        let bitMapRep = NSBitmapImageRep(cgImage: cgImage)
+        let pngData = bitMapRep.representation(using: .png, properties: [:])
+        return pngData
+    }
 }
