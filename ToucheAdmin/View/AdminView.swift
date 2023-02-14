@@ -18,45 +18,58 @@ struct AdminView: View {
     @EnvironmentObject var accountStore: AccountStore
     @StateObject var magazineStore = MagazineStore()
     @StateObject var perfumeStore = PerfumeStore()
+    @StateObject var apiStore = APIStore()
     
-    // create
+    // magazine flow
     @State private var flow: Flow = .read
+    // server task
+    @State private var task: ServerTask = .network
     
     var body: some View {
         let rect = getRect()
         let width = rect.width
         let height = rect.height
-        NavigationSplitView(columnVisibility: $visibility,
-        sidebar: {
-            sideBar()
-                .navigationSplitViewColumnWidth(200.0)
-        }, content: {
-            switch dueID {
-                /// magazine
-            case "magazine":
-                MagazineContentView(flow: $flow)
-                    .navigationSplitViewColumnWidth(250.0)
-                /// server
-            default:
-                List(0..<10) { i in
-                    Text("\(i) server")
+        NavigationSplitView(
+            columnVisibility: $visibility,
+            sidebar: {
+                sideBar()
+                    .navigationSplitViewColumnWidth(200.0)
+            }, content: {
+                switch dueID {
+                    /// magazine
+                case "magazine":
+                    MagazineContentView(flow: $flow)
+                        .navigationSplitViewColumnWidth(250.0)
+                    /// server
+                default:
+                    APIContentView(task: $task)
+                        .navigationSplitViewColumnWidth(250.0)
                 }
-                .navigationSplitViewColumnWidth(250.0)
-            }
-        }, detail: {
-            switch flow {
-            case .read:
-                MagazineReadView(flow: $flow)
-            case .create:
-                MagazineRegisterView(flow: $flow)
-            case .edit:
-                MagazineEditView(flow: $flow)
-            }
-        })
+            }, detail: {
+                switch dueID {
+                case "magazine":
+                    switch flow {
+                    case .read:
+                        MagazineReadView(flow: $flow)
+                    case .create:
+                        MagazineRegisterView(flow: $flow)
+                    case .edit:
+                        MagazineEditView(flow: $flow)
+                    }
+                default:
+                    switch task {
+                    case .network:
+                        APINetworkView()
+                    case .log:
+                        APILogView()
+                    }
+                }
+            })
         .frame(width: width * 0.6, height: height * 0.6)
         .navigationSplitViewStyle(.balanced)
         .environmentObject(magazineStore)
         .environmentObject(perfumeStore)
+        .environmentObject(apiStore)
         .alert("Account", isPresented: $isAccountTapped) {
             Button {
                 //

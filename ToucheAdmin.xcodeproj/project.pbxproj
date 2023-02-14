@@ -14,7 +14,6 @@
 		65EEF54929922283007147DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65EEF54829922283007147DF /* GoogleService-Info.plist */; };
 		65EEF5562992292F007147DF /* MagazineReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF5552992292F007147DF /* MagazineReadView.swift */; };
 		65EEF5582992293C007147DF /* MagazineRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF5572992293C007147DF /* MagazineRegisterView.swift */; };
-		65EEF55B2992299E007147DF /* StoreApiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF55A2992299E007147DF /* StoreApiView.swift */; };
 		65EEF55F29922B1A007147DF /* Magazine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EEF55E29922B1A007147DF /* Magazine.swift */; };
 		AA4D7F3C2995DF0100087E1F /* Due.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D7F3B2995DF0100087E1F /* Due.swift */; };
 		AA4D7F3E2995DF2B00087E1F /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D7F3D2995DF2B00087E1F /* Flow.swift */; };
@@ -42,6 +41,18 @@
 		AADB8174299B243D0046E983 /* PhotoModelFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8173299B243D0046E983 /* PhotoModelFileManager.swift */; };
 		AADB8177299B2F990046E983 /* DownloadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8176299B2F990046E983 /* DownloadingImageView.swift */; };
 		AADB817A299B2FEB0046E983 /* DownloadingImageVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8179299B2FEB0046E983 /* DownloadingImageVIewModel.swift */; };
+		AADB817C299B79420046E983 /* APIStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB817B299B79420046E983 /* APIStore.swift */; };
+		AADB817E299B799B0046E983 /* LongDescriptionParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB817D299B799B0046E983 /* LongDescriptionParsing.swift */; };
+		AADB8181299B7A560046E983 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = AADB8180299B7A560046E983 /* SwiftSoup */; };
+		AADB8183299B7AC80046E983 /* PerfumeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8182299B7AC80046E983 /* PerfumeColor.swift */; };
+		AADB8185299B7B5A0046E983 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8184299B7B5A0046E983 /* Product.swift */; };
+		AADB8187299B7BE30046E983 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8186299B7BE30046E983 /* Result.swift */; };
+		AADB8189299B7BF80046E983 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8188299B7BF80046E983 /* Detail.swift */; };
+		AADB818D299B81100046E983 /* ServerTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB818C299B81100046E983 /* ServerTask.swift */; };
+		AADB818F299B8ACF0046E983 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB818E299B8ACF0046E983 /* Log.swift */; };
+		AADB8193299BF9850046E983 /* APINetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8192299BF9850046E983 /* APINetworkView.swift */; };
+		AADB8195299BFAA20046E983 /* APILogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8194299BFAA20046E983 /* APILogView.swift */; };
+		AADB8198299BFB080046E983 /* APIContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8197299BFB080046E983 /* APIContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +65,6 @@
 		65EEF54829922283007147DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65EEF5552992292F007147DF /* MagazineReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineReadView.swift; sourceTree = "<group>"; };
 		65EEF5572992293C007147DF /* MagazineRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineRegisterView.swift; sourceTree = "<group>"; };
-		65EEF55A2992299E007147DF /* StoreApiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreApiView.swift; sourceTree = "<group>"; };
 		65EEF55E29922B1A007147DF /* Magazine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magazine.swift; sourceTree = "<group>"; };
 		AA4D7F3B2995DF0100087E1F /* Due.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Due.swift; sourceTree = "<group>"; };
 		AA4D7F3D2995DF2B00087E1F /* Flow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
@@ -75,6 +85,17 @@
 		AADB8173299B243D0046E983 /* PhotoModelFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModelFileManager.swift; sourceTree = "<group>"; };
 		AADB8176299B2F990046E983 /* DownloadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingImageView.swift; sourceTree = "<group>"; };
 		AADB8179299B2FEB0046E983 /* DownloadingImageVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingImageVIewModel.swift; sourceTree = "<group>"; };
+		AADB817B299B79420046E983 /* APIStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStore.swift; sourceTree = "<group>"; };
+		AADB817D299B799B0046E983 /* LongDescriptionParsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongDescriptionParsing.swift; sourceTree = "<group>"; };
+		AADB8182299B7AC80046E983 /* PerfumeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeColor.swift; sourceTree = "<group>"; };
+		AADB8184299B7B5A0046E983 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		AADB8186299B7BE30046E983 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		AADB8188299B7BF80046E983 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		AADB818C299B81100046E983 /* ServerTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTask.swift; sourceTree = "<group>"; };
+		AADB818E299B8ACF0046E983 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		AADB8192299BF9850046E983 /* APINetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINetworkView.swift; sourceTree = "<group>"; };
+		AADB8194299BFAA20046E983 /* APILogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILogView.swift; sourceTree = "<group>"; };
+		AADB8197299BFB080046E983 /* APIContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +108,7 @@
 				AAD9E75A2994E8E100DE31DF /* FirebaseFirestoreSwift in Frameworks */,
 				AAD9E7582994E8E100DE31DF /* FirebaseFirestoreCombine-Community in Frameworks */,
 				AAD9E75C2994E98100DE31DF /* FirebaseStorage in Frameworks */,
+				AADB8181299B7A560046E983 /* SwiftSoup in Frameworks */,
 				AAD9E7562994E8E100DE31DF /* FirebaseFirestore in Frameworks */,
 				AAD9E75E2994E98100DE31DF /* FirebaseStorageCombine-Community in Frameworks */,
 			);
@@ -152,7 +174,9 @@
 		65EEF55C299229A5007147DF /* API */ = {
 			isa = PBXGroup;
 			children = (
-				65EEF55A2992299E007147DF /* StoreApiView.swift */,
+				AADB8196299BFAFE0046E983 /* Content */,
+				AADB8190299BF94D0046E983 /* Log */,
+				AADB8191299BF9540046E983 /* Network */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -173,8 +197,9 @@
 		65EEF56029922B23007147DF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				65EEF55E29922B1A007147DF /* Magazine.swift */,
-				AAD9E7652994FBD800DE31DF /* Perfume.swift */,
+				AADB818B299B7C1A0046E983 /* Magazine */,
+				AADB818A299B7C110046E983 /* Perfume */,
+				AADB818E299B8ACF0046E983 /* Log.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,6 +210,7 @@
 				AAD9E7532994E8CA00DE31DF /* MagazineStore.swift */,
 				AA4D7F3F2995E07A00087E1F /* PerfumeStore.swift */,
 				AAD9E7472994B19C00DE31DF /* AccountStore.swift */,
+				AADB817B299B79420046E983 /* APIStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -194,6 +220,7 @@
 			children = (
 				AA4D7F3B2995DF0100087E1F /* Due.swift */,
 				AA4D7F3D2995DF2B00087E1F /* Flow.swift */,
+				AADB818C299B81100046E983 /* ServerTask.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -247,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				AADB8173299B243D0046E983 /* PhotoModelFileManager.swift */,
+				AADB817D299B799B0046E983 /* LongDescriptionParsing.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -265,6 +293,50 @@
 				AADB8179299B2FEB0046E983 /* DownloadingImageVIewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AADB818A299B7C110046E983 /* Perfume */ = {
+			isa = PBXGroup;
+			children = (
+				AAD9E7652994FBD800DE31DF /* Perfume.swift */,
+				AADB8182299B7AC80046E983 /* PerfumeColor.swift */,
+				AADB8184299B7B5A0046E983 /* Product.swift */,
+				AADB8186299B7BE30046E983 /* Result.swift */,
+				AADB8188299B7BF80046E983 /* Detail.swift */,
+			);
+			path = Perfume;
+			sourceTree = "<group>";
+		};
+		AADB818B299B7C1A0046E983 /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				65EEF55E29922B1A007147DF /* Magazine.swift */,
+			);
+			path = Magazine;
+			sourceTree = "<group>";
+		};
+		AADB8190299BF94D0046E983 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				AADB8194299BFAA20046E983 /* APILogView.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		AADB8191299BF9540046E983 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				AADB8192299BF9850046E983 /* APINetworkView.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		AADB8196299BFAFE0046E983 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				AADB8197299BFB080046E983 /* APIContentView.swift */,
+			);
+			path = Content;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +363,7 @@
 				AAD9E7592994E8E100DE31DF /* FirebaseFirestoreSwift */,
 				AAD9E75B2994E98100DE31DF /* FirebaseStorage */,
 				AAD9E75D2994E98100DE31DF /* FirebaseStorageCombine-Community */,
+				AADB8180299B7A560046E983 /* SwiftSoup */,
 			);
 			productName = ToucheAdmin;
 			productReference = 65EEF53629922245007147DF /* ToucheAdmin.app */;
@@ -322,6 +395,7 @@
 			mainGroup = 65EEF52D29922245007147DF;
 			packageReferences = (
 				65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AADB817F299B7A550046E983 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 65EEF53729922245007147DF /* Products */;
 			projectDirPath = "";
@@ -352,20 +426,29 @@
 			files = (
 				AA4D7F422995EE7100087E1F /* TestView.swift in Sources */,
 				AAD9E7542994E8CA00DE31DF /* MagazineStore.swift in Sources */,
+				AADB818F299B8ACF0046E983 /* Log.swift in Sources */,
+				AADB817E299B799B0046E983 /* LongDescriptionParsing.swift in Sources */,
 				AA4D7F3E2995DF2B00087E1F /* Flow.swift in Sources */,
 				AADB8174299B243D0046E983 /* PhotoModelFileManager.swift in Sources */,
 				AAD9E7412994769C00DE31DF /* NSTextField+.swift in Sources */,
+				AADB8187299B7BE30046E983 /* Result.swift in Sources */,
 				AAD9E7622994F1BD00DE31DF /* MagazineContentView.swift in Sources */,
 				65EEF5562992292F007147DF /* MagazineReadView.swift in Sources */,
+				AADB8183299B7AC80046E983 /* PerfumeColor.swift in Sources */,
 				AADB817A299B2FEB0046E983 /* DownloadingImageVIewModel.swift in Sources */,
 				AAD9E7482994B19C00DE31DF /* AccountStore.swift in Sources */,
-				65EEF55B2992299E007147DF /* StoreApiView.swift in Sources */,
 				AADB8177299B2F990046E983 /* DownloadingImageView.swift in Sources */,
 				65EEF5582992293C007147DF /* MagazineRegisterView.swift in Sources */,
+				AADB8193299BF9850046E983 /* APINetworkView.swift in Sources */,
 				AA995B792993961400E7AB35 /* AccountView.swift in Sources */,
+				AADB8198299BFB080046E983 /* APIContentView.swift in Sources */,
+				AADB8185299B7B5A0046E983 /* Product.swift in Sources */,
+				AADB8195299BFAA20046E983 /* APILogView.swift in Sources */,
 				65EEF55F29922B1A007147DF /* Magazine.swift in Sources */,
 				AAD9E7522994C17100DE31DF /* AdminView.swift in Sources */,
 				AA5572A52999F20E001479D0 /* MagazineEditView.swift in Sources */,
+				AADB817C299B79420046E983 /* APIStore.swift in Sources */,
+				AADB818D299B81100046E983 /* ServerTask.swift in Sources */,
 				65EEF53C29922245007147DF /* ContentView.swift in Sources */,
 				AAD9E7662994FBD800DE31DF /* Perfume.swift in Sources */,
 				AAD9E7602994EA1100DE31DF /* NSImage+.swift in Sources */,
@@ -375,6 +458,7 @@
 				AAD9E7642994F4CB00DE31DF /* Double+.swift in Sources */,
 				AA4D7F402995E07A00087E1F /* PerfumeStore.swift in Sources */,
 				65EEF53A29922245007147DF /* ToucheAdminApp.swift in Sources */,
+				AADB8189299B7BF80046E983 /* Detail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +664,14 @@
 				kind = branch;
 			};
 		};
+		AADB817F299B7A550046E983 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -617,6 +709,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 65EEF54A29922354007147DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		AADB8180299B7A560046E983 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AADB817F299B7A550046E983 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
