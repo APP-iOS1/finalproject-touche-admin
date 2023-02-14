@@ -219,7 +219,7 @@ struct MagazineEditView: View {
                         }
                     } // VSTACK(CONTENT IMAGE)
                     
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading) {
                         Text("Body Image")
                             .font(.caption)
                             .foregroundColor(.secondary)

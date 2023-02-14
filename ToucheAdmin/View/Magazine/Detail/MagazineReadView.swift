@@ -31,7 +31,7 @@ struct MagazineReadView: View {
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         
-                        Group {
+                        VStack(alignment: .leading, spacing: 6.0) {
                             Text("**Title** : \(magazine.title)")
                             Text("**Sub Title** : \(magazine.subTitle)")
                         } // FORM(TEXT)
@@ -99,7 +99,7 @@ struct MagazineReadView: View {
                                 // ==============================================================
                             } // VSTACK(CONTENT IMAGE)
                             
-                            VStack(alignment: .leading, spacing: 4) {
+                            VStack(alignment: .leading) {
                                 Text("Body Image")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
