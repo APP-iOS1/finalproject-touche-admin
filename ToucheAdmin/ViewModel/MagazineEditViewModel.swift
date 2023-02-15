@@ -18,6 +18,8 @@ final class MagazineEditViewModel: ObservableObject {
     @Published var canSaveState: Bool = false
     var cancellables = Set<AnyCancellable>()
     
+    let manager = PhotoModelFileManager.instance
+    
     enum ImageCategory {
         case content
         case body

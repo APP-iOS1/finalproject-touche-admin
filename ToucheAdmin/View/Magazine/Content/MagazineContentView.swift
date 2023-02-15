@@ -20,32 +20,34 @@ struct MagazineContentView: View {
                 HStack(alignment: .top, spacing: 8.0) {
                     // Content Image...
                     // ===================== FireStorage Issue ===================
-//                    AsyncImage(
-//                        url: URL(string: magazine.contentImage)) { image in
-//                            image
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(width: 50, height: 50)
-//                                .cornerRadius(6)
-//
-//                        } placeholder: {
-//                            ProgressView()
-//                        }
-//                    DownloadingImageView(
-//                        urlString: magazine.contentImage,
-//                        key: (magazine.id + "_content"))
-//                    .frame(width: 50, height: 50)
-//                    .cornerRadius(6)
-                    // ========================== comment below ===================
-                    Rectangle()
-                        .fill(Material.ultraThickMaterial)
-                        .frame(width: 50, height: 50)
-                        .overlay {
-                            Text("Storage 사용량 초과로 인한 임시조치\n(썸네일 사진 영역)")
-                                .font(.title)
-                                .fontWeight(.semibold)
-                                .multilineTextAlignment(.center)
+                    AsyncImage(
+                        url: URL(string: magazine.contentImage)) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
+                                .cornerRadius(6)
+
+                        } placeholder: {
+                            ProgressView()
                         }
+//                    ForEach([magazine], id: \.id) { magazine in
+//                        DownloadingImageView(
+//                            urlString: magazine.contentImage,
+//                            key: "\(magazine.id)Content")
+//                            .frame(width: 50, height: 50)
+//                            .cornerRadius(6)
+//                    }
+                    // ========================== comment below ===================
+//                    Rectangle()
+//                        .fill(Material.ultraThickMaterial)
+//                        .frame(width: 50, height: 50)
+//                        .overlay {
+//                            Text("Storage 사용량 초과로 인한 임시조치\n(썸네일 사진 영역)")
+//                                .font(.title)
+//                                .fontWeight(.semibold)
+//                                .multilineTextAlignment(.center)
+//                        }
                     // ============================================================
                     
                     VStack(alignment: .leading, spacing: 2) {

@@ -10,6 +10,12 @@ import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+enum APIError: Error {
+    case badDataFromSephora
+    case failDecodingData
+    case failUploadingToFirestore
+}
+
 class APIStore: ObservableObject {
     @Published var notice: String = ""
     @Published var products: [Product] = []
@@ -24,71 +30,71 @@ class APIStore: ObservableObject {
     
     var cancellables = Set<AnyCancellable>()
     let path = Firestore.firestore()
+    private let headers = [
+        "X-RapidAPI-Key": "bd60134ebbmsh47ad7cc85cd24d7p1cbc4ejsn3ed23622063e",
+        "X-RapidAPI-Host": "sephora.p.rapidapi.com"
+    ]
     
     func reset() {
         notice = ""
     }
     
-    private func fetch() {
-        switch cursor {
-        case nil:
-            path.collection("Perfume")
-                .limit(to: pageSize)
-                .getDocuments { [weak self] (snapshot: QuerySnapshot?, _ :Error?) in
-                    guard let snapshot = snapshot else { return }
-                    
-                    guard let lastSnapshot = snapshot.documents.last else {
-                        // The collection is empty.
-                        self?.cursor = nil
-                        return
-                    }
-                    
-                    self?.cursor = lastSnapshot
-                    
-                    self?.perfumes = snapshot.documents.compactMap { query -> Perfume? in
-                        do {
-                            return try query.data(as: Perfume.self)
-                        } catch {
-                            return nil
-                        }
-                    }
-                }
-        default:
-            path.collection("Perfume")
-                .limit(to: pageSize)
-                .start(afterDocument: cursor!)
-                .getDocuments { [weak self] (snapshot: QuerySnapshot?, _ :Error?) in
-                    guard let snapshot = snapshot else { return }
-                    
-                    guard let lastSnapshot = snapshot.documents.last else {
-                        // The collection is empty.
-                        self?.cursor = nil
-                        return
-                    }
-                    
-                    self?.cursor = lastSnapshot
-                    
-                    self?.perfumes = snapshot.documents.compactMap { query -> Perfume? in
-                        do {
-                            return try query.data(as: Perfume.self)
-                        } catch {
-                            return nil
-                        }
-                    }
-                }
-
-        }
-    }
+    //    private func fetch() {
+    //        switch cursor {
+    //        case nil:
+    //            path.collection("Perfume")
+    //                .limit(to: pageSize)
+    //                .getDocuments { [weak self] (snapshot: QuerySnapshot?, _ :Error?) in
+    //                    guard let snapshot = snapshot else { return }
+    //
+    //                    guard let lastSnapshot = snapshot.documents.last else {
+    //                        // The collection is empty.
+    //                        self?.cursor = nil
+    //                        return
+    //                    }
+    //
+    //                    self?.cursor = lastSnapshot
+    //
+    //                    self?.perfumes = snapshot.documents.compactMap { query -> Perfume? in
+    //                        do {
+    //                            return try query.data(as: Perfume.self)
+    //                        } catch {
+    //                            return nil
+    //                        }
+    //                    }
+    //                }
+    //        default:
+    //            path.collection("Perfume")
+    //                .limit(to: pageSize)
+    //                .start(afterDocument: cursor!)
+    //                .getDocuments { [weak self] (snapshot: QuerySnapshot?, _ :Error?) in
+    //                    guard let snapshot = snapshot else { return }
+    //
+    //                    guard let lastSnapshot = snapshot.documents.last else {
+    //                        // The collection is empty.
+    //                        self?.cursor = nil
+    //                        return
+    //                    }
+    //
+    //                    self?.cursor = lastSnapshot
+    //
+    //                    self?.perfumes = snapshot.documents.compactMap { query -> Perfume? in
+    //                        do {
+    //                            return try query.data(as: Perfume.self)
+    //                        } catch {
+    //                            return nil
+    //                        }
+    //                    }
+    //                }
+    //
+    //        }
+    //    }
+    //
     
     func fetchlistDataFromAPI(page: Int = 1) {
         isLoading = true
         
         notice = "Loading.."
-        
-        let headers = [
-            "X-RapidAPI-Key": "bd60134ebbmsh47ad7cc85cd24d7p1cbc4ejsn3ed23622063e",
-            "X-RapidAPI-Host": "sephora.p.rapidapi.com"
-        ]
         
         let request = NSMutableURLRequest(url: NSURL(string: "https://sephora.p.rapidapi.com/products/list?categoryId=cat60148&pageSize=\(pageSize)&currentPage=\(page)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
@@ -133,35 +139,42 @@ class APIStore: ObservableObject {
             .store(in: &cancellables)
     }
     
-    @Sendable @MainActor
-    private func refreshProductData() async -> Void {
-        self.products = await withCheckedContinuation { (continuation: CheckedContinuation<[Product], Never>) in
-            path.collection("temps")
-//                .limit(to: pageSize)
-                .getDocuments { (snapshot: QuerySnapshot?, _ :Error?) in
-                    guard let snapshot = snapshot else { return }
-                    let products = snapshot.documents.compactMap { query -> Product? in
-                        do {
-                            return try query.data(as: Product.self)
-                        } catch {
-                            return nil
-                        }
-                    }
-                    continuation.resume(returning: products)
-                }
-        }
-    }
+    //    @Sendable @MainActor
+    //    private func refreshProductData() async -> Void {
+    //        self.products = await withCheckedContinuation { (continuation: CheckedContinuation<[Product], Never>) in
+    //            path.collection("temps")
+    ////                .limit(to: pageSize)
+    //                .getDocuments { (snapshot: QuerySnapshot?, _ :Error?) in
+    //                    guard let snapshot = snapshot else { return }
+    //                    let products = snapshot.documents.compactMap { query -> Product? in
+    //                        do {
+    //                            return try query.data(as: Product.self)
+    //                        } catch {
+    //                            return nil
+    //                        }
+    //                    }
+    //                    continuation.resume(returning: products)
+    //                }
+    //        }
+    //    }
     
-    func fetchDetailData(product: Product) {
+//    func fetchAllDetailData() async {
+//        await withThrowingTaskGroup(of: Product.self, body: { group in
+//            for product in products {
+//                group.addTask {
+//                    product
+//                }
+//            }
+//
+//            group.
+//        })
+//    }
+    
+    func fetchDetailData(product: Product) async throws {
         
         // ------------------- products/detail fetching ------------------------------
         
         isLoading = true
-        
-        let headers = [
-            "X-RapidAPI-Key": "bd60134ebbmsh47ad7cc85cd24d7p1cbc4ejsn3ed23622063e",
-            "X-RapidAPI-Host": "sephora.p.rapidapi.com"
-        ]
         
         let request = NSMutableURLRequest(url: NSURL(string: "https://sephora.p.rapidapi.com/products/detail?productId=\(product.productId)&preferedSku=2210607")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
