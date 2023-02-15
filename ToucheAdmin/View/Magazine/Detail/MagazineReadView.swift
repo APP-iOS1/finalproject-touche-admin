@@ -95,7 +95,14 @@ struct MagazineReadView: View {
 //                                    .cornerRadius(8.0)
                                 // ================== comment below =============================
                                 Rectangle()
+                                    .fill(Material.ultraThickMaterial)
                                     .frame(width: 250, height: 250)
+                                    .overlay {
+                                        Text("Storage 사용량 초과로 인한 임시조치\n(썸네일 사진 영역)")
+                                            .font(.title)
+                                            .fontWeight(.semibold)
+                                            .multilineTextAlignment(.center)
+                                    }
                                 // ==============================================================
                             } // VSTACK(CONTENT IMAGE)
                             
@@ -122,7 +129,14 @@ struct MagazineReadView: View {
 //                                    .cornerRadius(8.0)
                                 // ===============================================================
                                 Rectangle()
+                                    .fill(Material.ultraThickMaterial)
                                     .frame(width: 250, height: 250)
+                                    .overlay {
+                                        Text("Storage 사용량 초과로 인한 임시조치\n(썸네일 사진 영역)")
+                                            .font(.title)
+                                            .fontWeight(.semibold)
+                                            .multilineTextAlignment(.center)
+                                    }
                                 // ==============================================================
                             } // VSTACK(BODY IMAGE)
                             

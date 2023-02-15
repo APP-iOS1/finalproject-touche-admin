@@ -53,6 +53,7 @@
 		AADB8193299BF9850046E983 /* APINetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8192299BF9850046E983 /* APINetworkView.swift */; };
 		AADB8195299BFAA20046E983 /* APILogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8194299BFAA20046E983 /* APILogView.swift */; };
 		AADB8198299BFB080046E983 /* APIContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB8197299BFB080046E983 /* APIContentView.swift */; };
+		AAF6DCAE299C611A00243DA5 /* MagazineEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6DCAD299C611A00243DA5 /* MagazineEditViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		AADB8192299BF9850046E983 /* APINetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINetworkView.swift; sourceTree = "<group>"; };
 		AADB8194299BFAA20046E983 /* APILogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILogView.swift; sourceTree = "<group>"; };
 		AADB8197299BFB080046E983 /* APIContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIContentView.swift; sourceTree = "<group>"; };
+		AAF6DCAD299C611A00243DA5 /* MagazineEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineEditViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				AADB8179299B2FEB0046E983 /* DownloadingImageVIewModel.swift */,
+				AAF6DCAD299C611A00243DA5 /* MagazineEditViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				65EEF53C29922245007147DF /* ContentView.swift in Sources */,
 				AAD9E7662994FBD800DE31DF /* Perfume.swift in Sources */,
 				AAD9E7602994EA1100DE31DF /* NSImage+.swift in Sources */,
+				AAF6DCAE299C611A00243DA5 /* MagazineEditViewModel.swift in Sources */,
 				AAD9E74529947BF900DE31DF /* Color+.swift in Sources */,
 				AA4D7F3C2995DF0100087E1F /* Due.swift in Sources */,
 				AAD9E74329947A9E00DE31DF /* View+.swift in Sources */,

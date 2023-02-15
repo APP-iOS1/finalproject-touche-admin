@@ -37,7 +37,14 @@ struct MagazineContentView: View {
 //                    .cornerRadius(6)
                     // ========================== comment below ===================
                     Rectangle()
+                        .fill(Material.ultraThickMaterial)
                         .frame(width: 50, height: 50)
+                        .overlay {
+                            Text("Storage 사용량 초과로 인한 임시조치\n(썸네일 사진 영역)")
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .multilineTextAlignment(.center)
+                        }
                     // ============================================================
                     
                     VStack(alignment: .leading, spacing: 2) {

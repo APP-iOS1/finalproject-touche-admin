@@ -22,6 +22,12 @@ class MagazineStore: ObservableObject {
     let firestore = Firestore.firestore().collection("Magazine")
     @Published var magazines: [Magazine] = []
     @Published var magazine: Magazine?
+    @Published var status: Status = .create
+    
+    enum Status {
+        case edit
+        case create
+    }
     
     init() {
         readMagazines()
