@@ -48,8 +48,8 @@ struct APINetworkView: View {
                 Spacer()
                 
                 Button("Upload All Product!") {
-                    apiStore.products.forEach {
-                        apiStore.fetchDetailData(product: $0)
+                    Task {
+                        
                     }
                 }
                 .disabled(apiStore.products.isEmpty)
@@ -78,7 +78,9 @@ struct APINetworkView: View {
             .onChange(of: selectedProduct) { productId in
                 if let productId = productId,
                    let product = apiStore.products.first(where: {$0.productId == productId}) {
-                    apiStore.fetchDetailData(product: product)
+                    Task {
+                        try await apiStore.fetchDetailData(product: product)
+                    }
                 }
             }
         }

@@ -51,6 +51,8 @@ struct MagazineEditView: View {
                             vm.isLoading = true
                             // 메거진 서버에 저장
                             await magazineStore.createMagazine(magazine: magazine, selectedContentUImage: vm.contentImage, selectedBodyUImage: vm.bodyImage)
+                            vm.manager.add(key: "\(magazine.id)Content", value: vm.contentImage!)
+                            vm.manager.add(key: "\(magazine.id)Body", value: vm.bodyImage!)
                             // 읽기 모드
                             flow = .read
                             // upload end
