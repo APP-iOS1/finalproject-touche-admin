@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Log: Identifiable {
+struct Log: Identifiable, Codable {
     var id: String = UUID().uuidString
     let content: String
     let date: Double

@@ -39,6 +39,21 @@ class APIStore: ObservableObject {
         notice = ""
     }
     
+    init() {
+        self.fetchLogs()
+    }
+    
+    private func fetchLogs() {
+        path.collection("Log")
+            .addSnapshotListener { [weak self] snapshot, _ in
+                if let snapshot = snapshot {
+                    self?.logs = snapshot.documents.compactMap {
+                        try? $0.data(as: Log.self)
+                    }
+                }
+            }
+    }
+    
     func fetchlistDataFromAPI(page: Int = 1) {
         isLoading = true
         
@@ -74,12 +89,12 @@ class APIStore: ObservableObject {
                     self?.notice = "success"
                     self?.isLoading = false
                     let log = Log(content: "SUCCESS - \(page) Page Products Fectch", date: Date.now.timeIntervalSince1970)
-                    self?.logs.insert(log, at: 0)
+                    try? self?.path.collection("Log").document(log.id).setData(from: log)
                 case .failure(let error):
                     self?.notice =  "fail: \(error)"
                     self?.isLoading = false
                     let log = Log(content: "FAIL - \(page) Page Products Fectch | REASON - \(error)", date: Date.now.timeIntervalSince1970)
-                    self?.logs.insert(log, at: 0)
+                    try? self?.path.collection("Log").document(log.id).setData(from: log)
                 }
             } receiveValue: { [weak self] (products: [Product]) in
                 self?.products = products
@@ -155,11 +170,13 @@ class APIStore: ObservableObject {
                         self.perfumes.append(perfume)
                         self.notice = "Success uploading perfume data to firestore(collection name: `Perfume`)"
                         let log = Log(content: "SUCCESS - \(product.brandName) / \(product.displayName) Uploading", date: Date.now.timeIntervalSince1970)
-                        self.logs.insert(log, at: 0)
+//                        self.logs.insert(log, at: 0)
+                        try self.path.collection("Log").document(log.id).setData(from: log)
                     } catch let error {
                         self.notice = "Uploading Error: \(error.localizedDescription)"
                         let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Uploading | REASON - \(error)", date: Date.now.timeIntervalSince1970)
-                        self.logs.insert(log, at: 0)
+                        try self.path.collection("Log").document(log.id).setData(from: log)
+//                        self.logs.insert(log, at: 0)
                         throw APIError.failUploadingToFirestore
                     }
                 }
@@ -167,13 +184,15 @@ class APIStore: ObservableObject {
             } catch let error {
                 self.notice = "Decoding Error: \(error.localizedDescription)"
                 let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Decoding | REASON - \(error)", date: Date.now.timeIntervalSince1970)
-                self.logs.insert(log, at: 0)
+                try self.path.collection("Log").document(log.id).setData(from: log)
+//                self.logs.insert(log, at: 0)
                 throw APIError.failDecodingData
             }
         } catch let error {
             self.notice = "Fetching Error: \(error.localizedDescription)"
             let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Fetching | REASON - \(error)", date: Date.now.timeIntervalSince1970)
-            self.logs.insert(log, at: 0)
+            try self.path.collection("Log").document(log.id).setData(from: log)
+//            self.logs.insert(log, at: 0)
             throw APIError.badDataFromSephora
         }
     }
