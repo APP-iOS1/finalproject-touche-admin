@@ -26,10 +26,12 @@ struct MagazineReadView: View {
         ZStack {
             if let magazine = magazineStore.magazine {
                 ScrollView {
-                    VStack(alignment: .center, spacing: 20.0) {
+                    VStack(alignment: .leading, spacing: 30.0) {
                         Text(magazine.createdDate.toDateFormat().formatted())
                             .font(.footnote)
                             .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        
                         HStack {
                             Spacer()
                             Button("edit") {
@@ -76,7 +78,7 @@ struct MagazineReadView: View {
                             } // SCROLL(PERFUMES)
                         } // VSTACK(PERFUMES)
                         
-                        HStack {
+//                        HStack {
                             VStack(alignment: .leading) {
                                 Text("Content Image")
                                     .font(.caption)
@@ -89,7 +91,7 @@ struct MagazineReadView: View {
                                         image
                                             .resizable()
                                             .aspectRatio(1.0, contentMode: .fill)
-                                            .frame(width: 250, height: 250)
+                                            .frame(width: 300, height: 300)
                                             .cornerRadius(8.0)
                                     }) {
                                         ProgressView()
@@ -114,7 +116,7 @@ struct MagazineReadView: View {
                                 // ==============================================================
                             } // VSTACK(CONTENT IMAGE)
                             
-                            VStack(alignment: .leading) {
+//                            VStack(alignment: .leading) {
                                 Text("Body Image")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
@@ -124,8 +126,10 @@ struct MagazineReadView: View {
                                     content: { image in
                                         image
                                             .resizable()
-                                            .aspectRatio(1.0, contentMode: .fill)
-                                            .frame(width: 250, height: 250)
+                                            .aspectRatio(contentMode: .fit)
+//                                            .aspectRatio(1.0, contentMode: .fill)
+//                                            .frame(width: 250, height: 250)
+//                                            .frame(maxWidth: 600.0)
                                             .cornerRadius(8.0)
                                     }) {
                                         ProgressView()
@@ -148,12 +152,12 @@ struct MagazineReadView: View {
 //                                            .multilineTextAlignment(.center)
 //                                    }
                                 // ==============================================================
-                            } // VSTACK(BODY IMAGE)
+//                            } // VSTACK(BODY IMAGE)
                             
-                            Spacer()
-                        } // HSTACK(IMAGES)
+//                            Spacer()
+//                        } // HSTACK(IMAGES)
                         
-                        Spacer()
+//                        Spacer()
                     } // VSTACK
                 }
                 .padding()

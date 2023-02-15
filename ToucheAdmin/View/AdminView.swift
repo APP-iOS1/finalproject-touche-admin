@@ -26,24 +26,21 @@ struct AdminView: View {
     @State private var task: ServerTask = .network
     
     var body: some View {
-        let rect = getRect()
-        let width = rect.width
-        let height = rect.height
         NavigationSplitView(
             columnVisibility: $visibility,
             sidebar: {
                 sideBar()
-                    .navigationSplitViewColumnWidth(200.0)
+                    .navigationSplitViewColumnWidth(min: 100.0, ideal: 200.0, max: 300)
             }, content: {
                 switch dueID {
                     /// magazine
                 case "magazine":
                     MagazineContentView(flow: $flow)
-                        .navigationSplitViewColumnWidth(250.0)
+                        .navigationSplitViewColumnWidth(min: 150.0, ideal: 250.0, max: 350.0)
                     /// server
                 default:
                     APIContentView(task: $task)
-                        .navigationSplitViewColumnWidth(250.0)
+                        .navigationSplitViewColumnWidth(min: 150.0, ideal: 250.0, max: 350.0)
                 }
             }, detail: {
                 switch dueID {
@@ -51,21 +48,25 @@ struct AdminView: View {
                     switch flow {
                     case .read:
                         MagazineReadView(flow: $flow)
+                            .navigationSplitViewColumnWidth(min: 250.0, ideal: 350.0, max: .infinity)
                     case .create:
                         MagazineRegisterView(flow: $flow)
+                            .navigationSplitViewColumnWidth(min: 250.0, ideal: 350.0, max: .infinity)
                     case .edit:
                         MagazineEditView(flow: $flow)
+                            .navigationSplitViewColumnWidth(min: 250.0, ideal: 350.0, max: .infinity)
                     }
                 default:
                     switch task {
                     case .network:
                         APINetworkView()
+                            .navigationSplitViewColumnWidth(min: 250.0, ideal: 350.0, max: .infinity)
                     case .log:
                         APILogView()
+                            .navigationSplitViewColumnWidth(min: 250.0, ideal: 350.0, max: .infinity)
                     }
                 }
             })
-        .frame(width: width * 0.6, height: height * 0.6)
         .navigationSplitViewStyle(.balanced)
         .environmentObject(magazineStore)
         .environmentObject(perfumeStore)

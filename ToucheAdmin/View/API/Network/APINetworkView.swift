@@ -9,8 +9,10 @@ import SwiftUI
 
 struct APINetworkView: View {
     @EnvironmentObject var apiStore: APIStore
-    @State private var page: Int = 1
+//    @State private var page: Int = 1
+    @AppStorage("page") private var page: Int = 1
     @State private var selectedProduct: Product.ID?
+    @State private var sortOrder = [KeyPathComparator(\Product.brandName), KeyPathComparator(\Product.displayName), KeyPathComparator(\Product.id)]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20.0) {
@@ -45,11 +47,15 @@ struct APINetworkView: View {
                     apiStore.fetchlistDataFromAPI(page: page)
                 }
                 
+                
+                
                 Spacer()
                 
                 Button("Upload All Product!") {
                     Task {
-                        
+                        apiStore.isLoading.toggle()
+                        await apiStore.fetchAllDetailData()
+                        apiStore.isLoading.toggle()
                     }
                 }
                 .disabled(apiStore.products.isEmpty)
@@ -75,11 +81,16 @@ struct APINetworkView: View {
                     TableRow(product)
                 }
             }
+            .onChange(of: sortOrder, perform: {
+                apiStore.products.sort(using: $0)
+            })
             .onChange(of: selectedProduct) { productId in
                 if let productId = productId,
                    let product = apiStore.products.first(where: {$0.productId == productId}) {
                     Task {
+                        apiStore.isLoading.toggle()
                         try await apiStore.fetchDetailData(product: product)
+                        apiStore.isLoading.toggle()
                     }
                 }
             }

@@ -39,57 +39,20 @@ class APIStore: ObservableObject {
         notice = ""
     }
     
-    //    private func fetch() {
-    //        switch cursor {
-    //        case nil:
-    //            path.collection("Perfume")
-    //                .limit(to: pageSize)
-    //                .getDocuments { [weak self] (snapshot: QuerySnapshot?, _ :Error?) in
-    //                    guard let snapshot = snapshot else { return }
-    //
-    //                    guard let lastSnapshot = snapshot.documents.last else {
-    //                        // The collection is empty.
-    //                        self?.cursor = nil
-    //                        return
-    //                    }
-    //
-    //                    self?.cursor = lastSnapshot
-    //
-    //                    self?.perfumes = snapshot.documents.compactMap { query -> Perfume? in
-    //                        do {
-    //                            return try query.data(as: Perfume.self)
-    //                        } catch {
-    //                            return nil
-    //                        }
-    //                    }
-    //                }
-    //        default:
-    //            path.collection("Perfume")
-    //                .limit(to: pageSize)
-    //                .start(afterDocument: cursor!)
-    //                .getDocuments { [weak self] (snapshot: QuerySnapshot?, _ :Error?) in
-    //                    guard let snapshot = snapshot else { return }
-    //
-    //                    guard let lastSnapshot = snapshot.documents.last else {
-    //                        // The collection is empty.
-    //                        self?.cursor = nil
-    //                        return
-    //                    }
-    //
-    //                    self?.cursor = lastSnapshot
-    //
-    //                    self?.perfumes = snapshot.documents.compactMap { query -> Perfume? in
-    //                        do {
-    //                            return try query.data(as: Perfume.self)
-    //                        } catch {
-    //                            return nil
-    //                        }
-    //                    }
-    //                }
-    //
-    //        }
-    //    }
-    //
+    init() {
+        self.fetchLogs()
+    }
+    
+    private func fetchLogs() {
+        path.collection("Log")
+            .addSnapshotListener { [weak self] snapshot, _ in
+                if let snapshot = snapshot {
+                    self?.logs = snapshot.documents.compactMap {
+                        try? $0.data(as: Log.self)
+                    }
+                }
+            }
+    }
     
     func fetchlistDataFromAPI(page: Int = 1) {
         isLoading = true
@@ -126,132 +89,111 @@ class APIStore: ObservableObject {
                     self?.notice = "success"
                     self?.isLoading = false
                     let log = Log(content: "SUCCESS - \(page) Page Products Fectch", date: Date.now.timeIntervalSince1970)
-                    self?.logs.insert(log, at: 0)
+                    try? self?.path.collection("Log").document(log.id).setData(from: log)
                 case .failure(let error):
                     self?.notice =  "fail: \(error)"
                     self?.isLoading = false
-                    let log = Log(content: "FAIL - \(page) Page Products Fectch\nREASON - \(error)", date: Date.now.timeIntervalSince1970)
-                    self?.logs.insert(log, at: 0)
+                    let log = Log(content: "FAIL - \(page) Page Products Fectch | REASON - \(error)", date: Date.now.timeIntervalSince1970)
+                    try? self?.path.collection("Log").document(log.id).setData(from: log)
                 }
             } receiveValue: { [weak self] (products: [Product]) in
                 self?.products = products
             }
             .store(in: &cancellables)
+        isLoading = false
     }
     
-    //    @Sendable @MainActor
-    //    private func refreshProductData() async -> Void {
-    //        self.products = await withCheckedContinuation { (continuation: CheckedContinuation<[Product], Never>) in
-    //            path.collection("temps")
-    ////                .limit(to: pageSize)
-    //                .getDocuments { (snapshot: QuerySnapshot?, _ :Error?) in
-    //                    guard let snapshot = snapshot else { return }
-    //                    let products = snapshot.documents.compactMap { query -> Product? in
-    //                        do {
-    //                            return try query.data(as: Product.self)
-    //                        } catch {
-    //                            return nil
-    //                        }
-    //                    }
-    //                    continuation.resume(returning: products)
-    //                }
-    //        }
-    //    }
+    /// taskGroup : [https://dev.to/gualtierofr/create-your-own-asyncsequence-1dkl](https://dev.to/gualtierofr/create-your-own-asyncsequence-1dkl)
+    func fetchAllDetailData() async {
+        await withThrowingTaskGroup(of: Product.self, body: { group in
+            for product in products {
+                group.addTask {
+                    product
+                }
+            }
+
+            var iterator = group.makeAsyncIterator()
+            do {
+                while let nextProduct = try await iterator.next() {
+                    try await fetchDetailData(product: nextProduct)
+                }
+            } catch {
+                print(error)
+            }
+        })
+    }
     
-//    func fetchAllDetailData() async {
-//        await withThrowingTaskGroup(of: Product.self, body: { group in
-//            for product in products {
-//                group.addTask {
-//                    product
-//                }
-//            }
-//
-//            group.
-//        })
-//    }
-    
+    @MainActor
     func fetchDetailData(product: Product) async throws {
-        
-        // ------------------- products/detail fetching ------------------------------
-        
-        isLoading = true
         
         let request = NSMutableURLRequest(url: NSURL(string: "https://sephora.p.rapidapi.com/products/detail?productId=\(product.productId)&preferedSku=2210607")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 60.0)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
         var longDescription: String = ""
         var quickDescription: String = ""
         
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                self.notice = "datatask error : " + String(describing: error?.localizedDescription)
-                self.isLoading = false
+        do {
+            // ------------------- products/detail fetching ------------------------------
+            let (data, response) = try await URLSession.shared.data(for: request as URLRequest)
+            guard let response = response as? HTTPURLResponse,
+                  (200..<300).contains(response.statusCode) else { return }
+            do {
+              // ------------------- json decoding ------------------------------
+                let detailData = try JSONDecoder().decode(Detail.self, from: data)
+                longDescription = detailData.longDescription
+                quickDescription = detailData.quickLookDescription
                 
-            } else {
-                if let jsonData = try? JSONDecoder().decode(Detail.self, from: data ?? Data()),
-                   let response = response as? HTTPURLResponse {
-                    print(response.statusCode)
-                    longDescription = jsonData.longDescription
-                    quickDescription = jsonData.quickLookDescription
+                let (family, finalType, finalKeyNotes) = makeDescription(longDesc: longDescription)
+                
+                if PerfumeColor.types.contains(where: {$0.name == finalType}) {
+                    let perfume = Perfume(
+                        perfumeId: product.productId,
+                        brandName: product.brandName,
+                        displayName: product.displayName,
+                        heroImage: product.heroImage,
+                        image450: product.image450,
+                        fragranceFamily: family,
+                        scentType: finalType,
+                        keyNotes: finalKeyNotes,
+                        fragranceDescription: quickDescription,
+                        likedPeople: [],
+                        commentCount: 0,
+                        totalPerfumeScore: 0
+                    )
                     
-                    // --------------------- (family, finalType, finalKeyNotes) ------------------
-                    
-                    let (family, finalType, finalKeyNotes) = makeDescription(longDesc: longDescription)
-                    
-                    // ------------------ firestore ------------------------------
-                    
-                    if finalType == PerfumeColor.types[0].name || finalType == PerfumeColor.types[1].name || finalType == PerfumeColor.types[2].name || finalType == PerfumeColor.types[3].name || finalType == PerfumeColor.types[4].name || finalType == PerfumeColor.types[5].name || finalType == PerfumeColor.types[6].name || finalType == PerfumeColor.types[7].name || finalType == PerfumeColor.types[8].name || finalType == PerfumeColor.types[9].name || finalType == PerfumeColor.types[10].name || finalType == PerfumeColor.types[11].name || finalType == PerfumeColor.types[12].name || finalType == PerfumeColor.types[13].name || finalType == PerfumeColor.types[14].name || finalType == PerfumeColor.types[15].name {
-                        
-                        let perfume = Perfume(
-                            perfumeId: product.productId,
-                            brandName: product.brandName,
-                            displayName: product.displayName,
-                            heroImage: product.heroImage,
-                            image450: product.image450,
-                            fragranceFamily: family,
-                            scentType: finalType,
-                            keyNotes: finalKeyNotes,
-                            fragranceDescription: quickDescription,
-                            likedPeople: [],
-                            commentCount: 0,
-                            totalPerfumeScore: 0
-                        )
-                        
-                        
-//                        self.path.collection("Perfume").document(product.productId)
-//                            .setData(perfume)
-                        do {
-                            try self.path.collection("Perfume").document(perfume.perfumeId).setData(from: perfume)
-                            DispatchQueue.main.async {
-                                self.perfumes.append(perfume)
-                                self.notice = "Success uploading perfume data to firestore(collection name: `Perfume`)"
-                                let log = Log(content: "SUCCESS - \(product.brandName) / \(product.displayName) Uploading", date: Date.now.timeIntervalSince1970)
-                                self.logs.insert(log, at: 0)
-                                self.isLoading = false
-                            }
-                        } catch let error {
-                            self.notice = "Error: \(error.localizedDescription)"
-                            let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Uploading\nREASON - \(error)", date: Date.now.timeIntervalSince1970)
-                            self.logs.insert(log, at: 0)
-                            self.isLoading = false
-                        }
-                        
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.notice = "json decoding fail: " + String(describing: error?.localizedDescription)
-                        let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Uploading\nREASON - \(self.notice)", date: Date.now.timeIntervalSince1970)
-                        self.logs.insert(log, at: 0)
-                        self.isLoading = false
+                    do {
+                        // ------------------- uploading to firestore ------------------------------
+                        try self.path.collection("Perfume").document(perfume.perfumeId).setData(from: perfume)
+                        self.perfumes.append(perfume)
+                        self.notice = "Success uploading perfume data to firestore(collection name: `Perfume`)"
+                        let log = Log(content: "SUCCESS - \(product.brandName) / \(product.displayName) Uploading", date: Date.now.timeIntervalSince1970)
+//                        self.logs.insert(log, at: 0)
+                        try self.path.collection("Log").document(log.id).setData(from: log)
+                    } catch let error {
+                        self.notice = "Uploading Error: \(error.localizedDescription)"
+                        let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Uploading | REASON - \(error)", date: Date.now.timeIntervalSince1970)
+                        try self.path.collection("Log").document(log.id).setData(from: log)
+//                        self.logs.insert(log, at: 0)
+                        throw APIError.failUploadingToFirestore
                     }
                 }
+                
+            } catch let error {
+                self.notice = "Decoding Error: \(error.localizedDescription)"
+                let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Decoding | REASON - \(error)", date: Date.now.timeIntervalSince1970)
+                try self.path.collection("Log").document(log.id).setData(from: log)
+//                self.logs.insert(log, at: 0)
+                throw APIError.failDecodingData
             }
-        })
-        
-        dataTask.resume()
+        } catch let error {
+            self.notice = "Fetching Error: \(error.localizedDescription)"
+            let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Fetching | REASON - \(error)", date: Date.now.timeIntervalSince1970)
+            try self.path.collection("Log").document(log.id).setData(from: log)
+//            self.logs.insert(log, at: 0)
+            throw APIError.badDataFromSephora
+        }
     }
 }

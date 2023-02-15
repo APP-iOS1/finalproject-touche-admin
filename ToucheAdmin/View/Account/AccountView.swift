@@ -12,12 +12,9 @@ import SwiftUI
 struct AccountView: View {
     @Binding var isSignIn: Bool
     @EnvironmentObject var accountStore: AccountStore
-   
+    
     private let logo: [String] = ["T","o","u","c","h","é"]
     var body: some View {
-        let rect = getRect()
-        let width = rect.width
-        let height = rect.height
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 24.0) {
                 Text("Welcome to Touché")
@@ -51,14 +48,15 @@ struct AccountView: View {
                     
                 }
                 
-                Button {
-                    // seek password
-                } label: {
-                    Text("Forgot Password?")
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                        .underline()
-                }
+                // TODO: 비밀번호 찾기
+                //                Button {
+                //                    // seek password
+                //                } label: {
+                //                    Text("Forgot Password?")
+                //                        .font(.body)
+                //                        .foregroundColor(.secondary)
+                //                        .underline()
+                //                }
                 
                 .buttonStyle(.plain)
                 
@@ -94,7 +92,7 @@ struct AccountView: View {
             }
             .padding()
             .padding(.top, 30)
-            .frame(width: width * 0.6 * 0.3)
+            .frame(minWidth: 300, idealWidth: 400, maxWidth: 500)
             
             Divider()
             
@@ -124,23 +122,32 @@ struct AccountView: View {
                 Circle()
                     .fill(Color.toucheWhite)
                     .frame(width: 200)
-                    .position(CGPoint(x: width * 01, y: height * 0.1))
-                    .blur(radius: 100, opaque: false)
+                    .blur(radius: 60, opaque: false)
+                    .offset(
+                        x: -200,
+                        y: -200
+                    )
                 
                 Circle()
                     .fill(Color.touchePink)
                     .frame(width: 200)
                     .padding([.leading], 100)
                     .padding([.bottom], 100)
-                    .position(CGPoint(x: width * 0.1, y: height * 0.25))
-                    .blur(radius: 100, opaque: false)
+                    .blur(radius: 50, opaque: false)
+                    .offset(
+                        x: -10,
+                        y: -10
+                    )
                 
                 Circle()
                     .fill(Color.purple)
                     .saturation(0.7)
                     .frame(width: 300)
-                    .position(CGPoint(x: width * 0.35, y: height * 0.5))
                     .blur(radius: 80, opaque: false)
+                    .offset(
+                        x: 300,
+                        y: 300
+                    )
                 
                 HStack(alignment: .center, spacing: 16.0) {
                     ForEach(logo.indices, id: \.self) { i in
@@ -151,9 +158,9 @@ struct AccountView: View {
                     }
                 }
             } // ZSTACK
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(minWidth: 300, idealWidth: 600 ,maxWidth: .infinity, maxHeight: .infinity)
+            .drawingGroup()
         }
-        .frame(width: width * 0.6, height: height * 0.6)
         .presentedWindowStyle(.hiddenTitleBar)
     }
 }

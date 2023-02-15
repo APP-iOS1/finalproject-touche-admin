@@ -79,9 +79,15 @@ func makeDescription(longDesc: String) -> (String, String, [String]) {
     ///[keyNotes]: Citron,Jasmine,TeakwoodFragra
     /// 각 문자열의 뒤의 글자들을 지워준다. (뒤의 남는 글자를 6개로 맞춤)
     for _ in 0...5 {
-        family.removeLast()
-        keyNotes.removeLast()
-        type.removeLast()
+        if !family.isEmpty {
+            family.removeLast()
+        }
+        if !keyNotes.isEmpty {
+            keyNotes.removeLast()
+        }
+        if !type.isEmpty {
+            type.removeLast()
+        }
     }
     
     

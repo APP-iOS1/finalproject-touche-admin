@@ -25,10 +25,11 @@ struct MagazineEditView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .center, spacing: 40.0) {
+            VStack(alignment: .leading, spacing: 40.0) {
                 Text(Date.now.formatted())
                     .font(.footnote)
                     .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
                 
                 HStack {
                     
@@ -124,7 +125,6 @@ struct MagazineEditView: View {
                 } // VSTACK(PERFUMES)
                 .frame(height: 120)
                 
-                HStack(spacing: 30) {
                     VStack(alignment: .leading) {
                         Text("Content Image")
                             .font(.caption)
@@ -140,12 +140,12 @@ struct MagazineEditView: View {
                             if let contentImage = vm.contentImage {
                                 Image(nsImage: contentImage)
                                     .resizable()
-                                    .frame(width: 250, height: 250, alignment: .center)
+                                    .frame(width: 300, height: 300, alignment: .center)
                                     .cornerRadius(8.0)
                             } else {
                                 RoundedRectangle(cornerRadius: 8.0)
                                     .fill(.quaternary)
-                                    .frame(width: 250, height: 250)
+                                    .frame(width: 300, height: 300)
                                     .overlay {
                                         Text("Select the image!\n**+**")
                                             .multilineTextAlignment(.center)
@@ -178,12 +178,12 @@ struct MagazineEditView: View {
                             if let bodyImage = vm.bodyImage {
                                 Image(nsImage: bodyImage)
                                     .resizable()
-                                    .frame(width: 250, height: 250, alignment: .center)
+                                    .aspectRatio(contentMode: .fit)
                                     .cornerRadius(8.0)
                             } else {
                                 RoundedRectangle(cornerRadius: 8.0)
                                     .fill(.quaternary)
-                                    .frame(width: 250, height: 250)
+                                    .frame(width: 300, height: 300)
                                     .overlay {
                                         Text("Select the image!\n**+**")
                                             .multilineTextAlignment(.center)
@@ -200,10 +200,6 @@ struct MagazineEditView: View {
                         }
                     } // VSTACK(BODY IMAGE)
                     
-                    Spacer()
-                } // HSTACK(IMAGES)
-                
-                Spacer()
             } // VSTACK
             .padding()
         } // SCROLL
