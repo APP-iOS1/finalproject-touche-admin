@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("isSignIn") var isSignIn: Bool = false
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        switch isSignIn {
+        case true:
+            AdminView(isSignIn: $isSignIn)
+        case false:
+            AccountView(isSignIn: $isSignIn)
         }
-        .padding()
     }
 }
 
