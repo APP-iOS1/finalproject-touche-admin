@@ -12,6 +12,7 @@ struct APINetworkView: View {
 //    @State private var page: Int = 1
     @AppStorage("page") private var page: Int = 1
     @State private var selectedProduct: Product.ID?
+    @State private var sortOrder = [KeyPathComparator(\Product.brandName), KeyPathComparator(\Product.displayName), KeyPathComparator(\Product.id)]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20.0) {
@@ -80,6 +81,9 @@ struct APINetworkView: View {
                     TableRow(product)
                 }
             }
+            .onChange(of: sortOrder, perform: {
+                apiStore.products.sort(using: $0)
+            })
             .onChange(of: selectedProduct) { productId in
                 if let productId = productId,
                    let product = apiStore.products.first(where: {$0.productId == productId}) {

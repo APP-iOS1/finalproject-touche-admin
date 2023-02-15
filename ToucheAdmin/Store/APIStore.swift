@@ -78,7 +78,7 @@ class APIStore: ObservableObject {
                 case .failure(let error):
                     self?.notice =  "fail: \(error)"
                     self?.isLoading = false
-                    let log = Log(content: "FAIL - \(page) Page Products Fectch\nREASON - \(error)", date: Date.now.timeIntervalSince1970)
+                    let log = Log(content: "FAIL - \(page) Page Products Fectch | REASON - \(error)", date: Date.now.timeIntervalSince1970)
                     self?.logs.insert(log, at: 0)
                 }
             } receiveValue: { [weak self] (products: [Product]) in
