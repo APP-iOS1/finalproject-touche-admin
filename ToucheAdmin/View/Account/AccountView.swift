@@ -12,9 +12,7 @@ import SwiftUI
 struct AccountView: View {
     @Binding var isSignIn: Bool
     @EnvironmentObject var accountStore: AccountStore
-    @State private var animation: Bool = false
-    let timer = Timer.TimerPublisher.init(interval: 10, runLoop: .current, mode: .common).autoconnect()
-   
+    
     private let logo: [String] = ["T","o","u","c","h","é"]
     var body: some View {
         HStack(spacing: 0) {
@@ -50,14 +48,15 @@ struct AccountView: View {
                     
                 }
                 
-                Button {
-                    // seek password
-                } label: {
-                    Text("Forgot Password?")
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                        .underline()
-                }
+                // TODO: 비밀번호 찾기
+                //                Button {
+                //                    // seek password
+                //                } label: {
+                //                    Text("Forgot Password?")
+                //                        .font(.body)
+                //                        .foregroundColor(.secondary)
+                //                        .underline()
+                //                }
                 
                 .buttonStyle(.plain)
                 
@@ -125,10 +124,9 @@ struct AccountView: View {
                     .frame(width: 200)
                     .blur(radius: 60, opaque: false)
                     .offset(
-                        x: animation ? .random(in: -300...500) : .random(in: -100...500),
-                        y: animation ? .random(in: -700...300) : .random(in: -200...600)
+                        x: -200,
+                        y: -200
                     )
-                    .animation(.spring(response: 1.2, dampingFraction: 1.4, blendDuration: 5).repeatForever(), value: animation)
                 
                 Circle()
                     .fill(Color.touchePink)
@@ -137,10 +135,9 @@ struct AccountView: View {
                     .padding([.bottom], 100)
                     .blur(radius: 50, opaque: false)
                     .offset(
-                        x: animation ? .random(in: -300...500) : .random(in: -100...500),
-                        y: animation ? .random(in: -700...300) : .random(in: -200...600)
+                        x: -10,
+                        y: -10
                     )
-                    .animation(.easeInOut(duration: 5).repeatForever(), value: animation)
                 
                 Circle()
                     .fill(Color.purple)
@@ -148,10 +145,9 @@ struct AccountView: View {
                     .frame(width: 300)
                     .blur(radius: 80, opaque: false)
                     .offset(
-                        x: animation ? .random(in: -300...500) : .random(in: -100...500),
-                        y: animation ? .random(in: -700...300) : .random(in: -200...600)
+                        x: 300,
+                        y: 300
                     )
-                    .animation(.linear(duration: 5).repeatForever(), value: animation)
                 
                 HStack(alignment: .center, spacing: 16.0) {
                     ForEach(logo.indices, id: \.self) { i in
@@ -166,16 +162,6 @@ struct AccountView: View {
             .drawingGroup()
         }
         .presentedWindowStyle(.hiddenTitleBar)
-        .onAppear {
-            animation = true
-        }
-        .onDisappear {
-            animation = false
-        }
-        .onReceive(timer) { time in
-            animation.toggle()
-            print(time)
-        }
     }
 }
 
