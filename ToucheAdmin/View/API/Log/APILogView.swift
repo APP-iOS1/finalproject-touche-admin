@@ -23,9 +23,11 @@ struct APILogView: View {
             // log table
             Table(of: Log.self) {
                 TableColumn("Content") { (log: Log) in
-                    Text(log.content)
-                        .font(.headline)
-                        .fontWeight(.regular)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        Text(log.content)
+                            .font(.headline)
+                            .fontWeight(.regular)                        
+                    }
                 }
                 TableColumn("Date") { (log: Log) in
                     Text(log.date.toDateFormat().formatted())

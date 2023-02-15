@@ -9,7 +9,8 @@ import SwiftUI
 
 struct APINetworkView: View {
     @EnvironmentObject var apiStore: APIStore
-    @State private var page: Int = 1
+//    @State private var page: Int = 1
+    @AppStorage("page") private var page: Int = 1
     @State private var selectedProduct: Product.ID?
     
     var body: some View {
@@ -45,11 +46,15 @@ struct APINetworkView: View {
                     apiStore.fetchlistDataFromAPI(page: page)
                 }
                 
+                
+                
                 Spacer()
                 
                 Button("Upload All Product!") {
                     Task {
-                        
+                        apiStore.isLoading.toggle()
+                        await apiStore.fetchAllDetailData()
+                        apiStore.isLoading.toggle()
                     }
                 }
                 .disabled(apiStore.products.isEmpty)
@@ -79,7 +84,9 @@ struct APINetworkView: View {
                 if let productId = productId,
                    let product = apiStore.products.first(where: {$0.productId == productId}) {
                     Task {
+                        apiStore.isLoading.toggle()
                         try await apiStore.fetchDetailData(product: product)
+                        apiStore.isLoading.toggle()
                     }
                 }
             }
