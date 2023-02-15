@@ -12,12 +12,11 @@ import SwiftUI
 struct AccountView: View {
     @Binding var isSignIn: Bool
     @EnvironmentObject var accountStore: AccountStore
+    @State private var animation: Bool = false
+    let timer = Timer.TimerPublisher.init(interval: 10, runLoop: .current, mode: .common).autoconnect()
    
     private let logo: [String] = ["T","o","u","c","h","é"]
     var body: some View {
-        let rect = getRect()
-        let width = rect.width
-        let height = rect.height
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 24.0) {
                 Text("Welcome to Touché")
@@ -94,7 +93,7 @@ struct AccountView: View {
             }
             .padding()
             .padding(.top, 30)
-            .frame(width: width * 0.6 * 0.3)
+            .frame(minWidth: 300, idealWidth: 400, maxWidth: 500)
             
             Divider()
             
@@ -124,23 +123,35 @@ struct AccountView: View {
                 Circle()
                     .fill(Color.toucheWhite)
                     .frame(width: 200)
-                    .position(CGPoint(x: width * 01, y: height * 0.1))
-                    .blur(radius: 100, opaque: false)
+                    .blur(radius: 60, opaque: false)
+                    .offset(
+                        x: animation ? .random(in: -300...500) : .random(in: -100...500),
+                        y: animation ? .random(in: -700...300) : .random(in: -200...600)
+                    )
+                    .animation(.spring(response: 1.2, dampingFraction: 1.4, blendDuration: 5).repeatForever(), value: animation)
                 
                 Circle()
                     .fill(Color.touchePink)
                     .frame(width: 200)
                     .padding([.leading], 100)
                     .padding([.bottom], 100)
-                    .position(CGPoint(x: width * 0.1, y: height * 0.25))
-                    .blur(radius: 100, opaque: false)
+                    .blur(radius: 50, opaque: false)
+                    .offset(
+                        x: animation ? .random(in: -300...500) : .random(in: -100...500),
+                        y: animation ? .random(in: -700...300) : .random(in: -200...600)
+                    )
+                    .animation(.easeInOut(duration: 5).repeatForever(), value: animation)
                 
                 Circle()
                     .fill(Color.purple)
                     .saturation(0.7)
                     .frame(width: 300)
-                    .position(CGPoint(x: width * 0.35, y: height * 0.5))
                     .blur(radius: 80, opaque: false)
+                    .offset(
+                        x: animation ? .random(in: -300...500) : .random(in: -100...500),
+                        y: animation ? .random(in: -700...300) : .random(in: -200...600)
+                    )
+                    .animation(.linear(duration: 5).repeatForever(), value: animation)
                 
                 HStack(alignment: .center, spacing: 16.0) {
                     ForEach(logo.indices, id: \.self) { i in
@@ -151,10 +162,20 @@ struct AccountView: View {
                     }
                 }
             } // ZSTACK
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(minWidth: 300, idealWidth: 600 ,maxWidth: .infinity, maxHeight: .infinity)
+            .drawingGroup()
         }
-        .frame(width: width * 0.6, height: height * 0.6)
         .presentedWindowStyle(.hiddenTitleBar)
+        .onAppear {
+            animation = true
+        }
+        .onDisappear {
+            animation = false
+        }
+        .onReceive(timer) { time in
+            animation.toggle()
+            print(time)
+        }
     }
 }
 
