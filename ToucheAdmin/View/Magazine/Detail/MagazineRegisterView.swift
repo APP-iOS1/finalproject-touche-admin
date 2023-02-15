@@ -19,6 +19,7 @@ struct MagazineRegisterView: View {
         case list
     }
     
+    /// perfumes 데이터를 (brand, perfumes)로 그룹핑한 데이터
     var items: [(brand: String, perfumes: [Perfume])] {
         return Dictionary(grouping: perfumeStore.perfumes) { perfume in
             return perfume.brandName
@@ -70,27 +71,38 @@ struct MagazineRegisterView: View {
                             Button {
                                 perfumeStore.popPerfume(perfume)
                             } label: {
-                                AsyncImage(url: URL(string: perfume.heroImage)) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 80, height: 80, alignment: .center)
-                                        .clipShape(RoundedRectangle(cornerRadius: 8.0))
-                                        .overlay(alignment: .topTrailing, content: {
-                                            Image(systemName: "xmark.circle")
-                                                .font(.title3)
-                                                .foregroundStyle(
-                                                    AngularGradient(
-                                                        colors: [.touchePink, .toucheBlue, .touchePurple, .toucheSky],
-                                                        center: .center
-                                                    )
+                                DownloadingImageView(urlString: perfume.image450, key: perfume.perfumeId)
+                                    .frame(width: 80, height: 80, alignment: .center)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8.0))
+                                    .overlay(alignment: .topTrailing, content: {
+                                        Image(systemName: "xmark.circle")
+                                            .font(.title3)
+                                            .foregroundStyle(
+                                                AngularGradient(
+                                                    colors: [.touchePink, .toucheBlue, .touchePurple, .toucheSky],
+                                                    center: .center
                                                 )
-                                                .padding(4)
-                                        })
-                                        .shadow(color: .primary.opacity(0.2) ,radius: 1)
-                                } placeholder: {
-                                    ProgressView()
-                                }
+                                            )
+                                            .padding(4)
+                                    })
+                                    .shadow(color: .primary.opacity(0.2) ,radius: 1)
+                                    .overlay(content: {
+                                        if perfumeStore.hoverCheckPerfume != nil  && perfumeStore.hoverCheckPerfume! == perfume {
+                                            ZStack {
+                                                Color.black.opacity(0.5)
+                                                    .cornerRadius(8.0)
+                                                
+                                                Text(perfume.displayName)
+                                                    .font(.body)
+                                                    .fontWeight(.light)
+                                                    .foregroundColor(.white)
+                                                    .multilineTextAlignment(.center)
+                                            }
+                                        }
+                                    })
+                                    .onHover { hovering in
+                                        perfumeStore.hasHoverPerfume(perfume, hovering: hovering)
+                                    }
                             }
                             .buttonStyle(.plain)
                         }
@@ -182,6 +194,20 @@ struct MagazineRegisterView: View {
                                     
                                 } label: {
                                     HStack(alignment: .center) {
+                                        Image(systemName: perfumeStore.checkPerfume(perfume) ? "checkmark.seal" : "seal")
+                                            .font(.title3)
+                                            .foregroundStyle(
+                                                AngularGradient(
+                                                    colors: [.touchePink, .toucheBlue, .touchePurple, .toucheSky],
+                                                    center: .center
+                                                )
+                                            )
+                                            .padding(2)
+                                            .background(Color.white)
+                                            .clipShape(Circle())
+                                            .padding(.trailing, 2)
+                                            .opacity(perfumeStore.checkPerfume(perfume) ? 1 : 0.4)
+                                        
                                         DownloadingImageView(urlString: perfume.image450, key: perfume.perfumeId)
                                             .frame(width: 50, height: 50)
                                             .cornerRadius(8.0)
@@ -189,21 +215,7 @@ struct MagazineRegisterView: View {
                                         
                                         Text(perfume.displayName)
                                             .font(.headline)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
                                         
-                                        if perfumeStore.checkPerfume(perfume) {
-                                            Image(systemName: "checkmark.seal")
-                                                .font(.title3)
-                                                .foregroundStyle(
-                                                    AngularGradient(
-                                                        colors: [.touchePink, .toucheBlue, .touchePurple, .toucheSky],
-                                                        center: .center
-                                                    )
-                                                )
-                                                .padding(4)
-                                                .background(Color.white)
-                                                .clipShape(Circle())
-                                        }
                                     } // HSTACK
                                 } // BUTTON
                                 .buttonStyle(.plain)

@@ -25,7 +25,7 @@ struct MagazineEditView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .center, spacing: 20.0) {
+            VStack(alignment: .center, spacing: 40.0) {
                 Text(Date.now.formatted())
                     .font(.footnote)
                     .foregroundColor(.secondary)

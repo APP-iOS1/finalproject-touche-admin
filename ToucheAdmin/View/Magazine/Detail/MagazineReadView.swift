@@ -30,6 +30,12 @@ struct MagazineReadView: View {
                         Text(magazine.createdDate.toDateFormat().formatted())
                             .font(.footnote)
                             .foregroundColor(.secondary)
+                        HStack {
+                            Spacer()
+                            Button("edit") {
+                                flow = .edit
+                            }
+                        }
                         
                         VStack(alignment: .leading, spacing: 6.0) {
                             Text("**Title** : \(magazine.title)")
@@ -147,13 +153,7 @@ struct MagazineReadView: View {
                     } // VSTACK
                 }
                 .padding()
-                .toolbar {
-                    ToolbarItem(placement: ToolbarItemPlacement.automatic) {
-                        Button("edit") {
-                            flow = .edit
-                        }
-                    }
-                }
+                
             } else {
                 Image("touche-logo")
                     .resizable()

@@ -11,6 +11,7 @@ import SwiftUI
 struct MagazineContentView: View {
     @Binding var flow: Flow
     @EnvironmentObject var magazineStore: MagazineStore
+    @EnvironmentObject var perfumeStore: PerfumeStore
     @State private var hasTrashAlert: Bool = false
     
     var body: some View {
@@ -69,8 +70,9 @@ struct MagazineContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: ToolbarItemPlacement.automatic) {
                 Button {
-                    flow = .create
                     magazineStore.magazine = nil
+                    perfumeStore.clearPerfume()
+                    flow = .create
                 } label: {
                     Image(systemName: "plus")
                 }
@@ -98,5 +100,6 @@ struct MagazineContentView_Previews: PreviewProvider {
     static var previews: some View {
         MagazineContentView(flow: .constant(.read))
             .environmentObject(MagazineStore())
+            .environmentObject(PerfumeStore())
     }
 }
