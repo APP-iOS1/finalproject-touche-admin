@@ -84,6 +84,7 @@ class APIStore: ObservableObject {
                         self.notice = "\(response.statusCode) error"
                         let log = Log(content: "FAIL - \(page) Page Products Fectch | REASON - \(response.statusCode) code : \(response.description)", date: Date.now.timeIntervalSince1970)
                         try? self.path.collection("Log").document(log.id).setData(from: log)
+                        self.isLoading = false
                         throw URLError(.badURL)
                     }
                 }
@@ -91,7 +92,6 @@ class APIStore: ObservableObject {
             }
             .decode(type: Result.self, decoder: JSONDecoder())
             .map { $0.products }
-            .retry(3)
             .sink { [weak self] in
                 switch $0 {
                 case .finished:

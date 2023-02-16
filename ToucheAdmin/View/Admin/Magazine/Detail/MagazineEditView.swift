@@ -38,38 +38,40 @@ struct MagazineEditView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 
                 /// magazine 등록 버튼, 모든 데이터들이 입력되어야 등록가능
-                Button {
-                    // 새로운 메거진 생성
-                    let magazine = Magazine(
-                        id: magazineStore.magazine == nil ? UUID().uuidString : magazineStore.magazine!.id,
-                        title: vm.title,
-                        subTitle: vm.subTitle,
-                        contentImage: "",
-                        bodyImage: "",
-                        createdDate: Date.now.timeIntervalSince1970,
-                        perfumeIds: perfumes.map { $0.perfumeId }
-                    )
+                HStack {
+                    Spacer()
+                    Button {
+                        // 새로운 메거진 생성
+                        let magazine = Magazine(
+                            id: magazineStore.magazine == nil ? UUID().uuidString : magazineStore.magazine!.id,
+                            title: vm.title,
+                            subTitle: vm.subTitle,
+                            contentImage: "",
+                            bodyImage: "",
+                            createdDate: Date.now.timeIntervalSince1970,
+                            perfumeIds: perfumes.map { $0.perfumeId }
+                        )
+                        
+                        Task {
+                            // upload start
+                            vm.isLoading = true
+                            // 메거진 서버에 저장
+                            await magazineStore.createMagazine(magazine: magazine, selectedContentUImage: vm.contentImage, selectedBodyUImage: vm.bodyImage)
+                            vm.manager.add(key: "\(magazine.id)Content", value: vm.contentImage!)
+                            vm.manager.add(key: "\(magazine.id)Body", value: vm.bodyImage!)
+                            // 읽기 모드
+                            flow = .read
+                            // upload end
+                            vm.isLoading = false
+                            magazineStore.status = .create
+                        }
+                        
+                    } label: {
+                        Text(magazineStore.magazine == nil ? "Save" : "Done")
+                    } // BUTTON(MAGAZINE)
+                    .disabled(!vm.canSaveState)
+                }
                     
-                    Task {
-                        // upload start
-                        vm.isLoading = true
-                        // 메거진 서버에 저장
-                        await magazineStore.createMagazine(magazine: magazine, selectedContentUImage: vm.contentImage, selectedBodyUImage: vm.bodyImage)
-                        vm.manager.add(key: "\(magazine.id)Content", value: vm.contentImage!)
-                        vm.manager.add(key: "\(magazine.id)Body", value: vm.bodyImage!)
-                        // 읽기 모드
-                        flow = .read
-                        // upload end
-                        vm.isLoading = false
-                        magazineStore.status = .create
-                    }
-                    
-                } label: {
-                    Text(magazineStore.magazine == nil ? "Save" : "Done")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                } // BUTTON(MAGAZINE)
-                .disabled(!vm.canSaveState)
-                
                 /// 텍스트 필드들
                 Form {
                     TextField(text: $vm.title, prompt: Text("Required.."), axis: .vertical) {
