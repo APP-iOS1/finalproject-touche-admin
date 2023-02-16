@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// LOG데이터 보여주는 뷰
 struct APILogView: View {
     @EnvironmentObject var apiStore: APIStore
     @State private var sortOrder = [KeyPathComparator(\Log.date), KeyPathComparator(\Log.content)]

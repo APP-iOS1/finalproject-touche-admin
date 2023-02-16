@@ -10,39 +10,43 @@ import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-enum APIError: Error {
-    case badDataFromSephora
-    case failDecodingData
-    case failUploadingToFirestore
-}
-
 class APIStore: ObservableObject {
+    // MARK: - PROPERTIES
     @Published var notice: String = ""
     @Published var products: [Product] = []
     @Published var perfumes: [Perfume] = []
     @Published var logs: [Log] = []
     @Published var isLoading: Bool = false
     
-    // ==========================================
-    private var cursor: QueryDocumentSnapshot?
     let pageSize = 60
-    // ==========================================
     
     var cancellables = Set<AnyCancellable>()
     let path = Firestore.firestore()
+    
+    // SEPHORA API HEADER
     private let headers = [
         "X-RapidAPI-Key": "bd60134ebbmsh47ad7cc85cd24d7p1cbc4ejsn3ed23622063e",
         "X-RapidAPI-Host": "sephora.p.rapidapi.com"
     ]
     
-    func reset() {
-        notice = ""
+    // CUSTOM ERROR
+    enum APIError: Error {
+        case badDataFromSephora
+        case failDecodingData
+        case failUploadingToFirestore
     }
+    
     
     init() {
         self.fetchLogs()
     }
     
+    /// reset function
+    func reset() {
+        notice = ""
+    }
+    
+    /// Firestore에 저장된 모든 Log 데이터 불러오기, 실시간 반영
     private func fetchLogs() {
         path.collection("Log")
             .addSnapshotListener { [weak self] snapshot, _ in
@@ -54,6 +58,10 @@ class APIStore: ObservableObject {
             }
     }
     
+    /// Sephora API/PRODUCT/LIST 항목 데이터 불러오는 함수
+    ///
+    /// - Perfume데이터가아닌 Product데이터를 불러옴
+    /// - `products` 프로퍼티에 저장후, `perfume`데이터를 불러올 예정
     func fetchlistDataFromAPI(page: Int = 1) {
         isLoading = true
         
@@ -74,7 +82,8 @@ class APIStore: ObservableObject {
                         return task.data
                     default:
                         self.notice = "\(response.statusCode) error"
-                        print("response error: ", response.description)
+                        let log = Log(content: "FAIL - \(page) Page Products Fectch | REASON - \(response.statusCode) code : \(response.description)", date: Date.now.timeIntervalSince1970)
+                        try? self.path.collection("Log").document(log.id).setData(from: log)
                         throw URLError(.badURL)
                     }
                 }
@@ -100,25 +109,37 @@ class APIStore: ObservableObject {
                 self?.products = products
             }
             .store(in: &cancellables)
+        
         isLoading = false
     }
     
-    /// taskGroup : [https://dev.to/gualtierofr/create-your-own-asyncsequence-1dkl](https://dev.to/gualtierofr/create-your-own-asyncsequence-1dkl)
+    /// products 데이터로 모든 perfume 데이터 불러오기
+    ///
+    /// - thread safe하게 taskGroup사용
+    /// - 참고: taskGroup : [https://dev.to/gualtierofr/create-your-own-asyncsequence-1dkl](https://dev.to/gualtierofr/create-your-own-asyncsequence-1dkl)
     func fetchAllDetailData() async {
         await withThrowingTaskGroup(of: Product.self, body: { group in
+            /// products 프로퍼티의 데이터를 task group화하기
             for product in products {
                 group.addTask {
                     product
                 }
             }
 
+            /// task group으로 perfume데이터 가져오기
             var iterator = group.makeAsyncIterator()
             do {
                 while let nextProduct = try await iterator.next() {
-                    try await fetchDetailData(product: nextProduct)
+                    do {
+                        try await fetchDetailData(product: nextProduct)
+                    } catch {
+                        let log = Log(content: "FAIL - \(nextProduct.brandName) / \(nextProduct.displayName) iterator | REASON - \(error)", date: Date.now.timeIntervalSince1970)
+                        try? self.path.collection("Log").document(log.id).setData(from: log)
+                    }
                 }
             } catch {
-                print(error)
+                let log = Log(content: "FAIL - 'fetchAllDetailData()' iterator | REASON - \(error)", date: Date.now.timeIntervalSince1970)
+                try? self.path.collection("Log").document(log.id).setData(from: log)
             }
         })
     }
@@ -170,13 +191,11 @@ class APIStore: ObservableObject {
                         self.perfumes.append(perfume)
                         self.notice = "Success uploading perfume data to firestore(collection name: `Perfume`)"
                         let log = Log(content: "SUCCESS - \(product.brandName) / \(product.displayName) Uploading", date: Date.now.timeIntervalSince1970)
-//                        self.logs.insert(log, at: 0)
                         try self.path.collection("Log").document(log.id).setData(from: log)
                     } catch let error {
                         self.notice = "Uploading Error: \(error.localizedDescription)"
                         let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Uploading | REASON - \(error)", date: Date.now.timeIntervalSince1970)
                         try self.path.collection("Log").document(log.id).setData(from: log)
-//                        self.logs.insert(log, at: 0)
                         throw APIError.failUploadingToFirestore
                     }
                 }
@@ -185,14 +204,12 @@ class APIStore: ObservableObject {
                 self.notice = "Decoding Error: \(error.localizedDescription)"
                 let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Decoding | REASON - \(error)", date: Date.now.timeIntervalSince1970)
                 try self.path.collection("Log").document(log.id).setData(from: log)
-//                self.logs.insert(log, at: 0)
                 throw APIError.failDecodingData
             }
         } catch let error {
             self.notice = "Fetching Error: \(error.localizedDescription)"
             let log = Log(content: "FAIL - \(product.brandName) / \(product.displayName) Fetching | REASON - \(error)", date: Date.now.timeIntervalSince1970)
             try self.path.collection("Log").document(log.id).setData(from: log)
-//            self.logs.insert(log, at: 0)
             throw APIError.badDataFromSephora
         }
     }

@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+/// API 작업 선택 뷰
 struct APIContentView: View {
     @Binding var task: ServerTask
+    
     var body: some View {
         List(ServerTask.allCases, selection: $task) { task in
             NavigationLink(value: task) {

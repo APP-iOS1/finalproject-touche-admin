@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// server 혹은 cache 이미지를 보여주는 뷰
 struct DownloadingImageView: View {
     @StateObject var loader: DownloadingImageViewModel
     

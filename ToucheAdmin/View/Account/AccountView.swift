@@ -7,97 +7,118 @@
 
 import SwiftUI
 
-// 1. Navigation SplitView 사용 금지 -> 커스텀한 Hstack, Vstack으로 대체
-// 2. 컬러디자인 사용.
+/// 로그인(계정) 뷰
 struct AccountView: View {
+    // MARK: - PROPERTIES
+    private let logo: [String] = ["T","o","u","c","h","é"]
     @Binding var isSignIn: Bool
     @EnvironmentObject var accountStore: AccountStore
     
-    private let logo: [String] = ["T","o","u","c","h","é"]
+    // MARK: - BODY
     var body: some View {
         HStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 24.0) {
-                Text("Welcome to Touché")
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("User Name")
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                    TextField("Enter your name..", text: $accountStore.email)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal)
-                        .foregroundColor(.primary)
-                        .background(.quaternary)
-                        .cornerRadius(8)
-                        .textFieldStyle(.plain)
-                    
-                }
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Password")
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                    SecureField("Enter your password..", text: $accountStore.password)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal)
-                        .background(.quaternary)
-                        .cornerRadius(8)
-                        .textFieldStyle(.plain)
-                    
-                }
-                
-                // TODO: 비밀번호 찾기
-                //                Button {
-                //                    // seek password
-                //                } label: {
-                //                    Text("Forgot Password?")
-                //                        .font(.body)
-                //                        .foregroundColor(.secondary)
-                //                        .underline()
-                //                }
-                
-                .buttonStyle(.plain)
-                
-                VStack(alignment: .leading, spacing: 16.0) {
-                    
-                    Button {
-                        Task {
-                            isSignIn = await accountStore.signInWithEmailPassword()
-                        }
-                    } label: {
-                        Text("Sign In")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.primary)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 40)
-                            .clipShape(Capsule())
-                            .background(
-                                Capsule()
-                                    .stroke(.primary)
-                            )
-                    }
-                    .buttonStyle(.plain)
-                    .disabled(!accountStore.isValid)
-                    
-                    Text(accountStore.errorMessage)
-                        .foregroundColor(.red)
-                        .font(.caption)
-                    
-                }
-                
-                Spacer()
-            }
-            .padding()
-            .padding(.top, 30)
-            .frame(minWidth: 300, idealWidth: 400, maxWidth: 500)
+            
+            sideBar()
             
             Divider()
             
-            // Gradient...
-            ZStack(alignment: .center) {
+            welcomeView()
+            
+        }
+        .presentedWindowStyle(.hiddenTitleBar)
+    }
+}
+
+private extension AccountView {
+    /// Account View의 Sidebar 부분입니다.
+    ///
+    /// - 이메일 입력, 비밀번호 입력
+    /// - 로그인, 비밀번호 찾기(개발 예정)
+    func sideBar() -> some View {
+        /// Input Layout
+        VStack(alignment: .leading, spacing: 24.0) {
+            /// Title
+            Text("Welcome to Touché")
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+            
+            /// Name Field
+            VStack(alignment: .leading, spacing: 8) {
+                Text("User E-mail")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                TextField("Enter your E-mail..", text: $accountStore.email)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal)
+                    .background(.quaternary)
+                    .cornerRadius(8)
+                    .textFieldStyle(.plain)
+            }
+            
+            /// Password Field
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Password")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                SecureField("Enter your password..", text: $accountStore.password)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal)
+                    .background(.quaternary)
+                    .cornerRadius(8)
+                    .textFieldStyle(.plain)
+            }
+            
+//            Button {
+//                // TODO: 비밀번호 찾기 ( Password Verification )
+//            } label: {
+//                Text("Forgot Password?")
+//                    .font(.body)
+//                    .foregroundColor(.secondary)
+//                    .underline()
+//            }
+//            .buttonStyle(.plain)
+            
+            /// Sign In Action
+            VStack(alignment: .leading, spacing: 16.0) {
+                /// Sign In Button
+                Button {
+                    Task {
+                        isSignIn = await accountStore.signInWithEmailPassword()
+                    }
+                } label: {
+                    Text("Sign In")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 40)
+                        .clipShape(Capsule())
+                        .background(
+                            Capsule()
+                                .stroke(.primary)
+                        )
+                }
+                .buttonStyle(.plain)
+                .disabled(!accountStore.isValid)
+                
+                /// Error Message
+                Text(accountStore.errorMessage)
+                    .foregroundColor(.red)
+                    .font(.caption)
+            }
+            
+            Spacer()
+        } // VSTACK(SIDE BAR)
+        .padding()
+        .padding(.top, 30)
+        .frame(minWidth: 300, idealWidth: 400, maxWidth: 500)
+    }
+    
+    /// Account View의 도입부입니다.
+    func welcomeView() -> some View {
+        ZStack(alignment: .center) {
+            // 1st background
+            Group {
                 LinearGradient(
                     stops: [
                         .init(color: .touchePink, location: 0.4),
@@ -118,7 +139,10 @@ struct AccountView: View {
                     endPoint: .bottomTrailing
                 )
                 .blendMode(.screen)
-                
+            }
+            
+            // 2nd background
+            Group {
                 Circle()
                     .fill(Color.toucheWhite)
                     .frame(width: 200)
@@ -148,20 +172,20 @@ struct AccountView: View {
                         x: 300,
                         y: 300
                     )
-                
-                HStack(alignment: .center, spacing: 16.0) {
-                    ForEach(logo.indices, id: \.self) { i in
-                        Text(logo[i])
-                            .font(.system(size: 60, weight: .heavy, design: .default))
-                            .fontWeight(.bold)
-                            .foregroundColor(.toucheWhite)
-                    }
+            }
+            
+            // Main Title
+            HStack(alignment: .center, spacing: 16.0) {
+                ForEach(logo.indices, id: \.self) { i in
+                    Text(logo[i])
+                        .font(.system(size: 60, weight: .heavy, design: .default))
+                        .fontWeight(.bold)
+                        .foregroundColor(.toucheWhite)
                 }
-            } // ZSTACK
-            .frame(minWidth: 300, idealWidth: 600 ,maxWidth: .infinity, maxHeight: .infinity)
-            .drawingGroup()
-        }
-        .presentedWindowStyle(.hiddenTitleBar)
+            } // HSTACK
+        } // ZSTACK
+        .frame(minWidth: 300, idealWidth: 600 ,maxWidth: .infinity, maxHeight: .infinity)
+        .drawingGroup()
     }
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Double타입에서 Date타입으로 변환
 extension Double {
     func toDateFormat() -> Date {
         return Date.init(timeIntervalSince1970: self)

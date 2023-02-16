@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+/// MagazineEditView 기능을 담당하는 class
 final class MagazineEditViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var subTitle: String = ""
@@ -34,6 +35,7 @@ final class MagazineEditViewModel: ObservableObject {
             .assign(to: &$canSaveState)
     }
     
+    /// 원격 이미지 데이터 불러오기
     func fecthNSImage(url: URL, category: ImageCategory) {
         URLSession.shared.dataTaskPublisher(for: url)
             .receive(on: DispatchQueue.main)
@@ -43,13 +45,8 @@ final class MagazineEditViewModel: ObservableObject {
                       let nsImage = NSImage(data: data) else { return nil }
                 return nsImage
             }
-            .sink { status in
-                switch status {
-                case .finished:
-                    print("fetch done")
-                case .failure(let error):
-                    print(error)
-                }
+            .sink { _ in
+                //
             } receiveValue: { [weak self] nsImage in
                 switch category {
                 case .content:

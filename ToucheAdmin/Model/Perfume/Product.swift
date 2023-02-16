@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Sephora API에서 './product/list'해당하는 데이터
 struct Product: Codable, Identifiable {
     var brandName: String
     var displayName: String

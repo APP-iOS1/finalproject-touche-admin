@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// TextField 링 처리
 extension NSTextField {
     open override var focusRingType: NSFocusRingType {
         get {.none}

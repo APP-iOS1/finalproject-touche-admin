@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 로그데이터를 얻기위한 Log 모델
 struct Log: Identifiable, Codable {
     var id: String = UUID().uuidString
     let content: String
