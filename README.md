@@ -1,7 +1,7 @@
 # 뚜셰(Touché) 관리자
 
 <p align=center>
-    <img src="img/logo.png" width=40%>
+    <img src="img/readme.png">
 </p>
 
 
@@ -83,3 +83,7 @@
 | :------------------------------------------------------------------------: |
 |                   광현</br>[@seo-kh](https://github.com/seo-kh)<br/>        |
 
+
+## 연관 링크
+
+뚜셰소비자앱 레포지터리 : [https://github.com/APPSCHOOL1-REPO/finalproject-touche](https://github.com/APPSCHOOL1-REPO/finalproject-touche)
