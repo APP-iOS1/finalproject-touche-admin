@@ -7,13 +7,16 @@
 
 import SwiftUI
 
+/// Sephora API에서 데이터를 가져와 Firestore로 옮기는 작업하는 뷰
 struct APINetworkView: View {
-    @EnvironmentObject var apiStore: APIStore
-//    @State private var page: Int = 1
-    @AppStorage("page") private var page: Int = 1
+    // MARK: - PROPERTIES
     @State private var selectedProduct: Product.ID?
     @State private var sortOrder = [KeyPathComparator(\Product.brandName), KeyPathComparator(\Product.displayName), KeyPathComparator(\Product.id)]
+    @AppStorage("page") private var page: Int = 1
     
+    @EnvironmentObject var apiStore: APIStore
+    
+    // MARK: - BODY
     var body: some View {
         VStack(alignment: .leading, spacing: 20.0) {
             // title
@@ -46,8 +49,6 @@ struct APINetworkView: View {
                 Button("Fetch Product!") {
                     apiStore.fetchlistDataFromAPI(page: page)
                 }
-                
-                
                 
                 Spacer()
                 

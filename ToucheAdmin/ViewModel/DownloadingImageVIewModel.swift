@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+
 final class DownloadingImageViewModel: ObservableObject {
     @Published var image: NSImage? = nil
     @Published var isLoading: Bool = false
@@ -24,16 +25,18 @@ final class DownloadingImageViewModel: ObservableObject {
         self.getImage()
     }
     
+    /// 외부 혹은 캐쉬로부터 데이터 가져오기
     func getImage() {
         if let savedImage = manager.get(key: key) {
             self.image = savedImage
-            print("Getting saved image!")
+//            print("Getting saved image!")
         } else {
-            print("Downloading image now!")
+//            print("Downloading image now!")
             downloadImage()
         }
     }
     
+    /// 외부의 데이터 불러오기
     func downloadImage() {
         isLoading = true
         guard let url = URL(string: urlString) else {

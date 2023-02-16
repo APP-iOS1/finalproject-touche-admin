@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Magazine 작업 분기 처리
 enum Flow {
     case read
     case create

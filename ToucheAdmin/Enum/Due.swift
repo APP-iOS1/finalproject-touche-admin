@@ -6,6 +6,10 @@
 //
 
 import Foundation
+/// 관리자의 할 일 목록
+///
+/// - Magazine 데이터 처리
+/// - Server 작업 처리
 enum Due: String, Identifiable, CaseIterable {
     
     case magazine

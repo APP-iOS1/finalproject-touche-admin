@@ -5,9 +5,9 @@
 //  Created by james seo on 2023/01/30.
 //
 
-import Foundation
 import SwiftUI
 
+/// Perfume Color를 나타내는 데이터모델
 struct PerfumeColor: Identifiable, Hashable {
     var id = UUID().uuidString
 

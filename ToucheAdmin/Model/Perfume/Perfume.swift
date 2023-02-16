@@ -5,6 +5,7 @@
 //
 import Foundation
 
+/// Perfume 데이터
 struct Perfume: Codable, Hashable {
     var perfumeId: String
     var brandName: String

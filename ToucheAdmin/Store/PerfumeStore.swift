@@ -13,6 +13,8 @@ import FirebaseFirestoreSwift
 /// 1. Firestore에서 모든 Perfume 데이터를 한 번에 불러온다.
 /// 2. 선택된 향수만을 처리해서 Magazine의 CRUD작업에 사용한다.
 final class PerfumeStore: ObservableObject {
+    /// Firestore 향수 데이터 경로
+    private let database = Firestore.firestore().collection("Perfume")
     /// Firestore에 저장된 향수 데이터
     @Published var perfumes: [Perfume] = []
     /// 작성자가 선택한 향수 배열 데이터
@@ -21,8 +23,6 @@ final class PerfumeStore: ObservableObject {
     @Published var isNextButtonDisabled: Bool = false
     /// hover 된 향수 데이터
     @Published var hoverCheckPerfume: Perfume?
-    /// Firestore 향수 데이터 경로
-    private let database = Firestore.firestore().collection("Perfume")
     
     init() {
         readPerfumesFromFirestore()
@@ -44,6 +44,7 @@ final class PerfumeStore: ObservableObject {
             }
     }
     
+    /// 선택한 향수들의 Id를 이용해 Firestore에서 데이터 불러오기
     func fetchPerfumes(_ ids: [String]) {
         return database
             .whereField("perfumeId", in: ids)

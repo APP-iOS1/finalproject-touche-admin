@@ -7,8 +7,8 @@
 
 import Foundation
 
+/// Server 작업 분기 처리
 enum ServerTask: String, Identifiable, CaseIterable {
-    
     case network
     case log
     

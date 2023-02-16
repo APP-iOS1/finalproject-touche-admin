@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Magazine 데이터 모델
 struct Magazine: Identifiable, Codable, Hashable{
     var id: String = UUID().uuidString
     let title: String
@@ -15,10 +16,4 @@ struct Magazine: Identifiable, Codable, Hashable{
     let bodyImage: String
     let createdDate: Double
     let perfumeIds: [String]
-    
-    static let dummy: [Magazine] =
-         (0..<10).map { i in
-             Magazine(title: "\(i) title", subTitle: "\(i) sub title", contentImage: "\(i) contentImage", bodyImage: "\(i) bodyImage", createdDate: Date.now.timeIntervalSince1970, perfumeIds: ["\(i)"])
-        }
-    
 }
