@@ -12,6 +12,28 @@
 > 기본적인 `향수` 정보, 시각화 정보를 제공해 `향수` 정보를 보다 직관적으로 알 수 있도록 돕는 `뚜셰(Touché) 관리자`앱니다.
 
 
+## Skills & Tech Stack
+
+<p>
+  <h4>개발</h4>
+    <span>
+      <img src="https://img.shields.io/badge/16.0+-FF6000?style=flat-square&logo=iOS&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white"/>
+      <img src="https://img.shields.io/badge/SwiftUI-0061b7?style=flat-square&logo=swift&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Xcode 14.2-147EFB?style=flat-square&logo=xcode&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=Firebase&logoColor=orange"/>
+    </span>
+  <br/>
+  <h4>협업 / 디자인</h4>
+    <span>
+      <img src="https://img.shields.io/badge/Github-000000?style=flat-square&logo=github&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=Jira&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
+    </span>
+    
+</p>
+
+
 ## 컨벤션
 
 
@@ -25,6 +47,15 @@
 - [Test] : 테스트 코드, 리펙토링 테스트 코드 추가
 - [Chore] : 빌드 업무 수정, 패키지 매니저 수정
 ```
+
+
+## 🎁 Library
+
+
+| Name              | Version |       |
+| ----------------- | :-----: | ----- |
+| Firebase          | `9.0.0` | `SPM` |
+| SwiftSoup         | `2.5.3` | `SPM` |
 
 
 ## 주요기능과 스크린샷
