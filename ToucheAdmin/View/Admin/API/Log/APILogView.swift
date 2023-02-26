@@ -14,7 +14,7 @@ struct APILogView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20.0) {
             // title
-            Text("log".uppercased())
+            Text("log".localized.uppercased())
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.horizontal)
@@ -24,14 +24,14 @@ struct APILogView: View {
             
             // log table
             Table(of: Log.self, sortOrder: $sortOrder) {
-                TableColumn("Content", sortUsing: KeyPathComparator(\Log.content)) { (log: Log) in
+                TableColumn("Content".localized, sortUsing: KeyPathComparator(\Log.content)) { (log: Log) in
                     ScrollView(.horizontal, showsIndicators: false) {
                         Text(log.content)
                             .font(.headline)
                             .fontWeight(.regular)                        
                     }
                 }
-                TableColumn("Date", sortUsing: KeyPathComparator(\Log.date)) { (log: Log) in
+                TableColumn("Date".localized, sortUsing: KeyPathComparator(\Log.date)) { (log: Log) in
                     Text(log.date.toDateFormat().formatted())
                         .font(.body)
                         .fontWeight(.regular)

@@ -38,16 +38,16 @@ private extension AccountView {
         /// Input Layout
         VStack(alignment: .leading, spacing: 24.0) {
             /// Title
-            Text("Welcome to Touché")
+            Text("Welcome to Touché".localized)
                 .font(.largeTitle)
                 .fontWeight(.heavy)
             
             /// Name Field
             VStack(alignment: .leading, spacing: 8) {
-                Text("User E-mail")
+                Text("User E-mail".localized)
                     .font(.body)
                     .foregroundColor(.secondary)
-                TextField("Enter your E-mail..", text: $accountStore.email)
+                TextField("Enter your E-mail..".localized, text: $accountStore.email)
                     .padding(.vertical, 10)
                     .padding(.horizontal)
                     .background(.quaternary)
@@ -57,10 +57,10 @@ private extension AccountView {
             
             /// Password Field
             VStack(alignment: .leading, spacing: 8) {
-                Text("Password")
+                Text("Password".localized)
                     .font(.body)
                     .foregroundColor(.secondary)
-                SecureField("Enter your password..", text: $accountStore.password)
+                SecureField("Enter your password..".localized, text: $accountStore.password)
                     .padding(.vertical, 10)
                     .padding(.horizontal)
                     .background(.quaternary)
@@ -86,7 +86,7 @@ private extension AccountView {
                         isSignIn = await accountStore.signInWithEmailPassword()
                     }
                 } label: {
-                    Text("Sign In")
+                    Text("Sign In".localized)
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)

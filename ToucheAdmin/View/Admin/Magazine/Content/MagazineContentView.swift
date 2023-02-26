@@ -40,11 +40,11 @@ struct MagazineContentView: View {
                 }
             }
         }
-        .alert("Are you sure deleting this magazine?", isPresented: $hasTrashAlert) {
-            Button("Cancel", role: .cancel) {
+        .alert("Are you sure deleting this magazine?".localized, isPresented: $hasTrashAlert) {
+            Button("Cancel".localized, role: .cancel) {
                 //
             }
-            Button("Delete", role: .destructive) {
+            Button("Delete".localized, role: .destructive) {
                 if let magazine = magazineStore.magazine {
                     magazineStore.deleteMagazine(magazine)
                 }

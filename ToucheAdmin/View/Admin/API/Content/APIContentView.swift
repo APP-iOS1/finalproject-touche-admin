@@ -20,7 +20,7 @@ struct APIContentView: View {
                         .aspectRatio(1.0, contentMode: .fit)
                         .frame(width: 20, height: 20)
                     
-                    Text(task.title)
+                    Text(task.title.localized)
                         .font(.headline)
                 }
             }

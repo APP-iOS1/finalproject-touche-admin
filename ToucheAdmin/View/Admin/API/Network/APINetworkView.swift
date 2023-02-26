@@ -20,7 +20,7 @@ struct APINetworkView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20.0) {
             // title
-            Text("network".uppercased())
+            Text("network".localized.uppercased())
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.horizontal)
@@ -36,7 +36,7 @@ struct APINetworkView: View {
                     Image(systemName: "chevron.left")
                 }
                 
-                Text("Page \(page)")
+                Text("Page \(page)".localized)
                 
                 Button {
                     if page < 20 {
@@ -46,13 +46,13 @@ struct APINetworkView: View {
                     Image(systemName: "chevron.right")
                 }
                 
-                Button("Fetch Product!") {
+                Button("Fetch Product!".localized) {
                     apiStore.fetchlistDataFromAPI(page: page)
                 }
                 
                 Spacer()
                 
-                Button("Upload All Product!") {
+                Button("Upload All Product!".localized) {
                     Task {
                         apiStore.isLoading.toggle()
                         await apiStore.fetchAllDetailData()
@@ -66,12 +66,12 @@ struct APINetworkView: View {
             
             // product Table
             Table(of: Product.self, selection: $selectedProduct) {
-                TableColumn("Id", value: \.productId)
+                TableColumn("Id".localized, value: \.productId)
                     .width(80.0)
-                TableColumn("Brand", value: \.brandName)
+                TableColumn("Brand".localized, value: \.brandName)
                     .width(120.0)
-                TableColumn("Product", value: \.displayName)
-                TableColumn("Uploded") { (product: Product) in
+                TableColumn("Product".localized, value: \.displayName)
+                TableColumn("Uploded".localized) { (product: Product) in
                     Circle()
                         .fill(apiStore.perfumes.contains(where: {$0.perfumeId == product.productId}) ? .green : .red)
                         .frame(maxWidth: 20.0, alignment: .center)
