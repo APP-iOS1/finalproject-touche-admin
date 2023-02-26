@@ -121,6 +121,14 @@
 | :------------------------------------------------------------------------: |
 |                   광현</br>[@seo-kh](https://github.com/seo-kh)<br/>        |
 
+## 앱 설치 실행 가이드
+```
+elinholic95@icloud.com 으로 연락 주시면 아래 파일을 전달받으실 수 있습니다.
+1. GoogleService-Info.plist
+2. `TocheAdmin/Store/APIStore.swift`를 사용하려면, [Sephora API](https://rapidapi.com/apidojo/api/sephora)사이트에서 계정을 생성해서 `X-RapidAPI-Key` 를 발급받아 사용하셔야 합니다. 
+
+위 파일 없이 간단한 앱 빌드만 필요하시다면, 번들 아이디 com.codelion.ToucheFinal 을 입력해주세요.
+```
 
 ## 연관 링크
 
