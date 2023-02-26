@@ -40,22 +40,22 @@ struct MagazineReadView: View {
                         /// Edit Button
                         HStack {
                             Spacer()
-                            Button("edit") {
+                            Button("edit".localized) {
                                 flow = .edit
                             }
                         }
                         
                         /// Title Section
                         VStack(alignment: .leading, spacing: 6.0) {
-                            Text("**Title** : \(magazine.title)")
-                            Text("**Sub Title** : \(magazine.subTitle)")
+                            Text("Title".localized).bold() + Text(" : \(magazine.title)")
+                            Text("Sub Title".localized).bold() + Text(" : \(magazine.subTitle)")
                         } // FORM(TEXT)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.title3)
                         
                         /// Perfume Section
                         VStack(alignment: .leading) {
-                            Text("Perfumes")
+                            Text("Perfumes".localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             
@@ -89,7 +89,7 @@ struct MagazineReadView: View {
                         
                         /// Content & Body Image
                         VStack(alignment: .leading) {
-                            Text("Content Image")
+                            Text("Content Image".localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             
@@ -106,7 +106,7 @@ struct MagazineReadView: View {
                                         .frame(width: 250, height: 250)
                                 }
                             
-                            Text("Body Image")
+                            Text("Body Image".localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             

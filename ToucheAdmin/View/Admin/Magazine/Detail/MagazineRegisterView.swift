@@ -79,7 +79,7 @@ struct MagazineRegisterView: View {
             ToolbarItem(placement: ToolbarItemPlacement.principal) {
                 Picker("Layout", selection: $layout) {
                     ForEach(Layout.allCases) {
-                        Text($0.rawValue).tag($0)
+                        Text($0.rawValue.localized).tag($0)
                     }
                 }
                 .pickerStyle(.segmented)
@@ -92,7 +92,7 @@ private extension MagazineRegisterView {
     /// 뷰 헤더
     func headerView() -> some View {
         HStack(alignment: .bottom, spacing: 10) {
-            Text("Select the perfumes")
+            Text("Select the perfumes".localized)
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
@@ -103,13 +103,13 @@ private extension MagazineRegisterView {
             Spacer()
             
             /// 선택한 향수 모두 삭제
-            Button("Clear") {
+            Button("Clear".localized) {
                 perfumeStore.clearPerfume()
             }
             .disabled(perfumeStore.isNextButtonDisabled)
             
             /// 향수 edit/upload 뷰로 이동.
-            Button("Next") {
+            Button("Next".localized) {
                 flow = .edit
             }
             .disabled(perfumeStore.isNextButtonDisabled)

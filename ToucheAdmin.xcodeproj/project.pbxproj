@@ -20,6 +20,8 @@
 		AA4D7F402995E07A00087E1F /* PerfumeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D7F3F2995E07A00087E1F /* PerfumeStore.swift */; };
 		AA5572A52999F20E001479D0 /* MagazineEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5572A42999F20E001479D0 /* MagazineEditView.swift */; };
 		AA995B792993961400E7AB35 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA995B782993961400E7AB35 /* AccountView.swift */; };
+		AACDB5F429AB864C00DBC5C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AACDB5F629AB864C00DBC5C8 /* Localizable.strings */; };
+		AACDB5F929AB900B00DBC5C8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDB5F829AB900B00DBC5C8 /* String+.swift */; };
 		AAD9E7412994769C00DE31DF /* NSTextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E7402994769C00DE31DF /* NSTextField+.swift */; };
 		AAD9E74329947A9E00DE31DF /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E74229947A9E00DE31DF /* View+.swift */; };
 		AAD9E74529947BF900DE31DF /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9E74429947BF900DE31DF /* Color+.swift */; };
@@ -71,6 +73,9 @@
 		AA4D7F3F2995E07A00087E1F /* PerfumeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfumeStore.swift; sourceTree = "<group>"; };
 		AA5572A42999F20E001479D0 /* MagazineEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineEditView.swift; sourceTree = "<group>"; };
 		AA995B782993961400E7AB35 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		AACDB5F529AB864C00DBC5C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AACDB5F729AB866100DBC5C8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AACDB5F829AB900B00DBC5C8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		AAD9E7402994769C00DE31DF /* NSTextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+.swift"; sourceTree = "<group>"; };
 		AAD9E74229947A9E00DE31DF /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		AAD9E74429947BF900DE31DF /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
@@ -147,6 +152,7 @@
 				65EEF55D299229B5007147DF /* View */,
 				AADB8178299B2FC50046E983 /* ViewModel */,
 				65EEF54229922245007147DF /* ToucheAdmin.entitlements */,
+				AACDB5F629AB864C00DBC5C8 /* Localizable.strings */,
 				65EEF53D29922245007147DF /* Assets.xcassets */,
 				65EEF54829922283007147DF /* GoogleService-Info.plist */,
 			);
@@ -277,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				AAD9E7402994769C00DE31DF /* NSTextField+.swift */,
+				AACDB5F829AB900B00DBC5C8 /* String+.swift */,
 				AAD9E74229947A9E00DE31DF /* View+.swift */,
 				AAD9E74429947BF900DE31DF /* Color+.swift */,
 				AAD9E75F2994EA1100DE31DF /* NSImage+.swift */,
@@ -407,6 +414,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 65EEF52D29922245007147DF;
 			packageReferences = (
@@ -428,6 +436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EEF54129922245007147DF /* Preview Assets.xcassets in Resources */,
+				AACDB5F429AB864C00DBC5C8 /* Localizable.strings in Resources */,
 				65EEF53E29922245007147DF /* Assets.xcassets in Resources */,
 				65EEF54929922283007147DF /* GoogleService-Info.plist in Resources */,
 			);
@@ -450,6 +459,7 @@
 				AAD9E7622994F1BD00DE31DF /* MagazineContentView.swift in Sources */,
 				65EEF5562992292F007147DF /* MagazineReadView.swift in Sources */,
 				AADB8183299B7AC80046E983 /* PerfumeColor.swift in Sources */,
+				AACDB5F929AB900B00DBC5C8 /* String+.swift in Sources */,
 				AADB817A299B2FEB0046E983 /* DownloadingImageVIewModel.swift in Sources */,
 				AAD9E7482994B19C00DE31DF /* AccountStore.swift in Sources */,
 				AADB8177299B2F990046E983 /* DownloadingImageView.swift in Sources */,
@@ -480,11 +490,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		AACDB5F629AB864C00DBC5C8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AACDB5F529AB864C00DBC5C8 /* en */,
+				AACDB5F729AB866100DBC5C8 /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		65EEF54329922245007147DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -545,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -608,6 +632,7 @@
 				DEVELOPMENT_TEAM = WPL7Q42L8U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Touché Admin";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -635,6 +660,7 @@
 				DEVELOPMENT_TEAM = WPL7Q42L8U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Touché Admin";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

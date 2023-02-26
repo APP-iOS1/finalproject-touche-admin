@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  ToucheAdmin
+
+  Created by james seo on 2023/02/26.
+  
+*/
+
+"User E-mail" = "User E-mail";
+"Password" = "Password";
+"Welcome to Touché" = "Welcome to Touché";
+"Enter your E-mail.." = "Enter your E-mail..";
+"Enter your password.." = "Enter your password..";
+"Sign In" = "Sign In";
+"magazine" = "magazine";
+"server" = "server";
+"edit" = "edit";
+"Account" = "Account";
+"Sign Out" = "Sign Out";
+"Cancel" = "Cancel";
+"Are you sure deleting this magazine?" = "Are you sure deleting this magazine?";
+"Delete" = "Delete";
+"Title" = "Title";
+"Sub Title" = "Sub Title";
+"Perfumes" = "Perfumes";
+"Content Image" = "Content Image";
+"Body Image" = "Body Image";
+"Select the perfumes" = "Select the perfumes";
+"Clear" = "Clear";
+"Next" = "Next";
+"Required.." = "Required..";
+"Perfume Pick" = "Perfume Pick";
+"Select the image!" = "Select the image!";
+"Done" = "Done";
+"network" = "network";
+"Page %lld" = "Page %lld";
+"Fetch Product!" = "Fetch Product!";
+"Upload All Product!" = "Upload All Product!";
+"Id" = "Id";
+"Brand" = "Brand";
+"Product" = "Product";
+"Uploded" = "Uploded";
+"log" = "log";
+"Content" = "Content";
+"Date" = "Date";
+"grid" = "grid";
+"list" = "list";

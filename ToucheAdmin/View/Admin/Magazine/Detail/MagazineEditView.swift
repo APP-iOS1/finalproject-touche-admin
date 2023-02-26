@@ -74,13 +74,13 @@ struct MagazineEditView: View {
                     
                 /// 텍스트 필드들
                 Form {
-                    TextField(text: $vm.title, prompt: Text("Required.."), axis: .vertical) {
-                        Text("Title")
+                    TextField(text: $vm.title, prompt: Text("Required..".localized), axis: .vertical) {
+                        Text("Title".localized)
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    TextField(text: $vm.subTitle, prompt: Text("Required.."), axis: .vertical) {
-                        Text("Sub Title")
+                    TextField(text: $vm.subTitle, prompt: Text("Required..".localized), axis: .vertical) {
+                        Text("Sub Title".localized)
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 } // FORM(TEXT FIELD)
@@ -89,7 +89,7 @@ struct MagazineEditView: View {
                     
                     HStack(spacing: 16.0) {
                         /// 타이틀
-                        Text("Perfumes")
+                        Text("Perfumes".localized)
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
@@ -100,7 +100,7 @@ struct MagazineEditView: View {
                             flow = .create
                             magazineStore.status = .edit
                         } label: {
-                            Label("Perfume Pick", systemImage: "chevron.left")
+                            Label("Perfume Pick".localized, systemImage: "chevron.left")
                         }
                     } // HSTACK
                     
@@ -136,7 +136,7 @@ struct MagazineEditView: View {
                 
                 /// 이미지 업로드
                 VStack(alignment: .leading) {
-                    Text("Content Image")
+                    Text("Content Image".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
@@ -157,7 +157,7 @@ struct MagazineEditView: View {
                                 .fill(.quaternary)
                                 .frame(width: 300, height: 300)
                                 .overlay {
-                                    Text("Select the image!\n**+**")
+                                    Text("Select the image!".localized+"\n+")
                                         .multilineTextAlignment(.center)
                                 }
                         }
@@ -174,7 +174,7 @@ struct MagazineEditView: View {
                 
                 VStack(alignment: .leading) {
                     /// 타이틀
-                    Text("Body Image")
+                    Text("Body Image".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
@@ -195,7 +195,7 @@ struct MagazineEditView: View {
                                 .fill(.quaternary)
                                 .frame(width: 300, height: 300)
                                 .overlay {
-                                    Text("Select the image!\n**+**")
+                                    Text("Select the image!".localized + "\n+")
                                         .multilineTextAlignment(.center)
                                 }
                         }

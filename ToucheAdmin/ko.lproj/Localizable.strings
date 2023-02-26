@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  ToucheAdmin
+
+  Created by james seo on 2023/02/26.
+  
+*/
+
+"User E-mail" = "이메일";
+"Password" = "비밀번호";
+"Welcome to Touché" = "환영합니다. 뚜셰(Touché)입니다.";
+"Enter your E-mail.." = "이메일을 입력하세요..";
+"Enter your password.." = "비밀번호를 입력하세요..";
+"Sign In" = "로그인하기";
+"magazine" = "메거진";
+"server" = "서버";
+"edit" = "수정";
+"Account" = "계정";
+"Sign Out" = "로그아웃하기";
+"Cancel" = "취소";
+"Are you sure deleting this magazine?" = "이 메거진을 삭제하시겠습니까?";
+"Delete" = "삭제";
+"Title" = "제목";
+"Sub Title" = "부제목";
+"Perfumes" = "향수";
+"Content Image" = "대표 이미지";
+"Body Image" = "바디 이미지";
+"Select the perfumes" = "향수를 선택하세요";
+"Clear" = "초기화";
+"Next" = "다음";
+"Required.." = "필수항목..";
+"Perfume Pick" = "향수 고르기";
+"Select the image!" = "이미지를 선택하세요!";
+"Done" = "완료";
+"network" = "네트워크";
+"Page %lld" = "%lld 페이지";
+"Fetch Product!" = "제품 데이터 받기!";
+"Upload All Product!" = "전체 제품 업로드하기!";
+"Id" = "Id";
+"Brand" = "브랜드";
+"Product" = "제품";
+"Uploded" = "업로드 상태";
+"log" = "로그";
+"Content" = "내용";
+"Date" = "날짜";
+"grid" = "그리드";
+"list" = "리스트";

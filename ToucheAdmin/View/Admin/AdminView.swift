@@ -76,11 +76,11 @@ struct AdminView: View {
             .environmentObject(magazineStore)
             .environmentObject(perfumeStore)
             .environmentObject(apiStore)
-            .alert("Account", isPresented: $isAccountTapped) {
+            .alert("Account".localized, isPresented: $isAccountTapped) {
                 Button {
                     //
                 } label: {
-                    Text("Cancel")
+                    Text("Cancel".localized)
                 }
                 .buttonStyle(.plain)
                 
@@ -88,7 +88,7 @@ struct AdminView: View {
                     accountStore.signOut()
                     isSignIn = false
                 } label: {
-                    Text("Sing Out")
+                    Text("Sign Out".localized)
                 }
                 .buttonStyle(.plain)
             }
@@ -124,9 +124,9 @@ private extension AdminView {
             List(Due.allCases, selection: $dueID) { due in
                 switch due {
                 case .magazine:
-                    Label(due.title, systemImage: due.systemName)
+                    Label(due.title.localized, systemImage: due.systemName)
                 case .server:
-                    Label(due.title, systemImage: due.systemName)
+                    Label(due.title.localized, systemImage: due.systemName)
                 }
             }
             
