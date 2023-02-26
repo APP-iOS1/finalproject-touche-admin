@@ -67,7 +67,7 @@ struct MagazineEditView: View {
                         }
                         
                     } label: {
-                        Text(magazineStore.magazine == nil ? "Save" : "Done")
+                        Text(magazineStore.magazine == nil ? "Save".localized : "Done".localized)
                     } // BUTTON(MAGAZINE)
                     .disabled(!vm.canSaveState)
                 }
