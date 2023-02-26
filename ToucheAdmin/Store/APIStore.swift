@@ -25,7 +25,7 @@ class APIStore: ObservableObject {
     
     // SEPHORA API HEADER
     private let headers = [
-        "X-RapidAPI-Key": "bd60134ebbmsh47ad7cc85cd24d7p1cbc4ejsn3ed23622063e",
+        "X-RapidAPI-Key": "(key 값 넣으세요.)",
         "X-RapidAPI-Host": "sephora.p.rapidapi.com"
     ]
     
