@@ -8,15 +8,16 @@
 
 "User E-mail" = "이메일";
 "Password" = "비밀번호";
-"Welcome to Touché" = "환영합니다. 뚜셰(Touché)입니다.";
+"Welcome to Touché" = "환영합니다. \n뚜셰(Touché)관리자앱 입니다.";
 "Enter your E-mail.." = "이메일을 입력하세요..";
 "Enter your password.." = "비밀번호를 입력하세요..";
-"Sign In" = "로그인하기";
+"Sign In" = "로그인";
 "magazine" = "메거진";
 "server" = "서버";
 "edit" = "수정";
+"Save" = "저장";
 "Account" = "계정";
-"Sign Out" = "로그아웃하기";
+"Sign Out" = "로그아웃";
 "Cancel" = "취소";
 "Are you sure deleting this magazine?" = "이 메거진을 삭제하시겠습니까?";
 "Delete" = "삭제";
@@ -33,10 +34,10 @@
 "Select the image!" = "이미지를 선택하세요!";
 "Done" = "완료";
 "network" = "네트워크";
-"Page %lld" = "%lld 페이지";
+"Page" = "페이지";
 "Fetch Product!" = "제품 데이터 받기!";
 "Upload All Product!" = "전체 제품 업로드하기!";
-"Id" = "Id";
+"Id" = "아이디";
 "Brand" = "브랜드";
 "Product" = "제품";
 "Uploded" = "업로드 상태";

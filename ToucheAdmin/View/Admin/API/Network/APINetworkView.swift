@@ -36,7 +36,7 @@ struct APINetworkView: View {
                     Image(systemName: "chevron.left")
                 }
                 
-                Text("Page \(page)".localized)
+                Text("Page".localized + " \(page)")
                 
                 Button {
                     if page < 20 {
