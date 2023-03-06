@@ -1,4 +1,4 @@
-# 뚜셰(Touché) 관리자
+# 뚜셰(Touché) 관리자 (macOS)
 
 <p align=center>
     <img src="img/readme.png">
@@ -24,7 +24,7 @@
 <p>
   <h4>개발</h4>
     <span>
-      <img src="https://img.shields.io/badge/16.0+-FF6000?style=flat-square&logo=iOS&logoColor=white"/>
+      <img src="https://img.shields.io/badge/macOS%2013.0+-FF6000?style=flat-square&logoColor=white"/>
       <img src="https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white"/>
       <img src="https://img.shields.io/badge/SwiftUI-0061b7?style=flat-square&logo=swift&logoColor=white"/>
       <img src="https://img.shields.io/badge/Xcode 14.2-147EFB?style=flat-square&logo=xcode&logoColor=white"/>
@@ -121,14 +121,20 @@
 | :------------------------------------------------------------------------: |
 |                   광현</br>[@seo-kh](https://github.com/seo-kh)<br/>        |
 
-## 앱 설치 실행 가이드
-```
-elinholic95@icloud.com 으로 연락 주시면 아래 파일을 전달받으실 수 있습니다.
-1. GoogleService-Info.plist
-2. `TocheAdmin/Store/APIStore.swift`를 사용하려면, [Sephora API](https://rapidapi.com/apidojo/api/sephora)사이트에서 계정을 생성해서 `X-RapidAPI-Key` 를 발급받아 사용하셔야 합니다. 
 
-위 파일 없이 간단한 앱 빌드만 필요하시다면, 번들 아이디 com.codelion.ToucheFinal 을 입력해주세요.
-```
+## 앱 설치 실행 가이드
+
+elinholic95@icloud.com 으로 연락 주시면 아래 파일을 전달받으실 수 있습니다.
+`GoogleService-Info.plist`
+
+> `TocheAdmin/Store/APIStore.swift`를 사용하려면, [Sephora API](https://rapidapi.com/apidojo/api/sephora)사이트에서 계정을 생성해서 `X-RapidAPI-Key` 를 발급받아 사용하셔야 합니다. 
+
+> 위 파일 없이 간단한 앱 빌드만 필요하시다면, 번들 아이디 com.codelion.ToucheFinal 을 입력해주세요.
+
+## 라이센스
+
+[MIT](https://choosealicense.com/licenses/mit/)
+Touché is available under the MIT license. See the [LICENSE](https://github.com/APPSCHOOL1-REPO/finalproject-touche/blob/main/License) file for more info.
 
 ## 연관 링크
 
